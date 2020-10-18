@@ -1,56 +1,101 @@
 {% extends "layout/admin.html" %}
 {% block body %}
 
-    <div class="row">
-      <div class="col-md-12 mt-5"> 
-        <div class="row justify-content-right">
-          <div class="col-md-7">
-            
-            <div class="card card-outline-secondary box-shadow--3dp">
-              <div class="card-body">
-                <h3><b>Liste des catégorie</b></h3> <br>
+
+<div class="row">
+    <div class="col-md-12 mt-5"> 
+      <div class="row justify-content-center">
+        <div class="col-md-7">
+          
+          <div class="card card-outline-secondary box-shadow--3dp">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3><b>Liste des catégories</b></h3>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <a class="btn btn-primary" href="{{url_for('categorie.ajoutcate')}}  ">Ajouter</a>
+                    </div>
                 
-                                        {% with messages= get_flashed_messages(with_categories=true) %}
-                                        {% if messages  %}
-                                        {% for category, message in messages %}
-                                        {%if category!="danger"%}
-                                            <div class="alert round bg-{{ category }} alert-icon-left alert-dismissible mb-2" role="alert">
-                                                <span class="alert-icon">
-                                                    <i class="ft-thumbs-up"></i>
-                                                </span>
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                                <strong>{{ message }}!</strong> 
-                                                
-                                            </div>
-                                        {%else%}
-                                            <div class="alert round bg-{{ category }} alert-icon-left alert-dismissible mb-2" role="alert">
-                                                <span class="alert-icon">
-                                                    <i class="ft-thumbs-down"></i>
-                                                </span>
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                                <strong>{{ message }}!</strong>
-                                                
-                                            </div>
-                                        {%endif%}
-                                        
-                                        {% endfor %}
-                                        {% endif %}
-                                        {% endwith %}
+                </div>
+                <br><br>
+                                      {% with messages= get_flashed_messages(with_categories=true) %}
+                                      {% if messages  %}
+                                      {% for category, message in messages %}
+                                      {%if category!="danger"%}
+                                          <div class="alert round bg-{{ category }} alert-icon-left alert-dismissible mb-2" role="alert">
+                                              <span class="alert-icon">
+                                                  <i class="fa fa-thumbs-o-down"></i>
+                                              </span>
+                                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                              </button>
+                                              <strong class="text-gray-900">{{ message }}!</strong> 
+                                              
+                                          </div>
+                                      {%else%}
+                                          <div class="alert round bg-{{ category }} alert-icon-left alert-dismissible mb-2" role="alert">
+                                              <span class="alert-icon">
+                                                  <i class="fa fa-thumbs-o-up"></i>
+                                              </span>
+                                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                              </button>
+                                              <strong class="text-gray-900">{{ message }}!</strong>
+                                              
+                                          </div>
+                                      {%endif%}
+                                      
+                                      {% endfor %}
+                                      {% endif %}
+                                      {% endwith %}
+              
+                                <div class="row">
+
+                                  {%if liste !=[]%} 
+                                    <div class="col-md-12">
+                                      <table class="table">
+                                        <thead>
+                                          <tr>
+                                            <th>Nom catégorie</th>
+                                            <th class="text-center">Statut </th>
+                                            <th class="text-center">Action</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          {%for categorie in liste%}
+                                          <tr>
+                                            <td> {{categorie.nom}} </td>
+                                            <td class="text-center">
+                                              {%if categorie.statut==True%}
+                                              <a href="{{url_for('categorie.statut', cat_id=categorie.id)}}"><i class="fa fa-lock" aria-hidden="true"></i></a>
+                                              {%else%}
+                                              <a href="{{url_for('categorie.statut', cat_id=categorie.id)}}"><i class="fa fa-unlock" aria-hidden="true"></i></a>
+                                              {%endif%}
+                                            </td>
+                                            <td class="text-center"><a href="{{url_for('categorie.edit', cate_id=categorie.id)}}"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
+                                          </tr>
+                                          {%endfor%}
+                                        </tbody>
+                                      </table>
+                                
+                                    </div>
+                                  {%else%}
+                                    <div class="col-md-12">
+                                      <p class="text-center" style="margin-top:100px">
+                                          <i class="fa fa-folder success fa-5x text-center"></i>
+                                          <h4 class="text-center">AUCUNE CATEGORIE .</h4>
+                                          <br><br><br><br><br><br>
+                                      </p>
+                                    </div>
+                                  {%endif%}
+                                </div> 
                 
-
-
-
-
-                                       
-              </div><!--/card-block-->
-            </div><!-- /form card login -->
-          </div>
+            </div><!--/card-block-->
+          </div><!-- /form card login -->
         </div>
-      </div><!--/col-->
-    </div><!--/row-->
+      </div>
+    </div><!--/col-->
+  </div><!--/row-->
 
 {% endblock body %}
