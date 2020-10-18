@@ -73,4 +73,7 @@ def create_app(config_name):
     from .categorie import categorie as categorie_blueprint
     app.register_blueprint(categorie_blueprint)
 
+    from .user import user as user_blueprint
+    app.register_blueprint(user_blueprint)
+    
     return app

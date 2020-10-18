@@ -82,6 +82,7 @@ class User(db.Model, UserMixin):
     prenom= db.Column(db.String(128))
     username = db.Column(db.String(128))
     password = db.Column(db.String(128))
+    role = db.Column(db.String(128))
     password_onhash = db.Column(db.String(128))
     statut=db.Column(db.Boolean, default=False)
     avatar=db.Column(db.String(128), default='user.png')
