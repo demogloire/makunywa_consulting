@@ -13,6 +13,7 @@ class Categorie(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nom = db.Column(db.String(128))
     publications = db.relationship('Publication', backref='cat_pub', lazy='dynamic')
+    date_mod=db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     statut = db.Column(db.Boolean, default=False)  
     def __repr__(self):
         return ' {} '.format(self.nom)
@@ -43,6 +44,7 @@ class Sondage(db.Model):
     statut = db.Column(db.Boolean, default=False)  
     date_debut=db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     date_fin=db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    date_mod=db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     resultats = db.relationship('Resultat', backref='sond_resul', lazy='dynamic')
     def __repr__(self):
         return ' {} '.format(self.titre)
@@ -52,6 +54,7 @@ class Resultat(db.Model):
     nbr_obtenu = db.Column(db.Integer, default=0)
     sondage_id = db.Column(db.Integer, db.ForeignKey('sondage.id'), nullable=False) 
     condidat_id = db.Column(db.Integer, db.ForeignKey('candidat.id'), nullable=False) 
+    date_mod=db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     visteur_id = db.Column(db.Integer, db.ForeignKey('visiteur.id'), nullable=False) 
     def __repr__(self):
         return ' {} '.format(self.nbr_obtenu)
@@ -63,6 +66,7 @@ class Candidat(db.Model):
     parti_regroupement = db.Column(db.String(128))
     description = db.Column(db.Text)
     url_img= db.Column(db.String(128))
+    date_mod=db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     resultats = db.relationship('Resultat', backref='cond_resul', lazy='dynamic')
     def __repr__(self):
         return ' {} '.format(self.nom)
@@ -71,6 +75,7 @@ class Fichier(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     url_img= db.Column(db.String(128))
     url_pdf= db.Column(db.String(128))
+    date_mod=db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     publication_id = db.Column(db.Integer, db.ForeignKey('publication.id'), nullable=False) 
     def __repr__(self):
         return ' {} '.format(self.url_img)
@@ -85,6 +90,7 @@ class User(db.Model, UserMixin):
     role = db.Column(db.String(128))
     password_onhash = db.Column(db.String(128))
     statut=db.Column(db.Boolean, default=False)
+    date_mod=db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     avatar=db.Column(db.String(128), default='user.png')
     publications = db.relationship('Publication', backref='user_pub', lazy='dynamic')
     def __repr__(self):
@@ -93,6 +99,7 @@ class User(db.Model, UserMixin):
 class Internaute(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre_vis = db.Column(db.Integer, default=0)
+    date_mod=db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     date_vist=db.Column(db.Date)
     def __repr__(self):
         return ' {} '.format(self.nombre_v_par)
@@ -101,6 +108,7 @@ class Visiteur(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     pseudonyme = db.Column(db.String(128))
     adress_mac = db.Column(db.String(128))
+    date_mod=db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     avatar=db.Column(db.String(128))
     resultats = db.relationship('Resultat', backref='user_pub', lazy='dynamic')
     def __repr__(self):
@@ -113,6 +121,7 @@ class Commentaire(db.Model):
     primaire = db.Column(db.Boolean, default=False) 
     secondaire = db.Column(db.Boolean, default=False) 
     id_primaire = db.Column(db.Integer) 
+    date_mod=db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     publication_id = db.Column(db.Integer, db.ForeignKey('publication.id'), nullable=False) 
     def __repr__(self):
         return ' {} '.format(self.commentaire)
