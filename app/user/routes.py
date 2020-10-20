@@ -1,7 +1,7 @@
 from flask import render_template, flash, url_for, redirect, request, session
 from .. import db, bcrypt
 from ..models import User
-from app.user.forms import AjoutUserForm
+from app.user.forms import AjoutUserForm, EditUserForm
 from flask_login import login_user, current_user, logout_user, login_required
 from ..utilites.utility import title_page
 from . import user
@@ -26,19 +26,84 @@ def ajouter():
       db.session.add(user_nv)
       db.session.commit()
       flash("Ajout avec success",'primary')
+      return redirect(url_for('user.index'))
          
    return render_template('user/ajouter.html', form=form, title=title)
 
 
+""" Liste des utilisateurs """
+@user.route('/', methods=['GET', 'POST'])
+def index():
+   #Titre
+   title=title_page("Utilisateur")
+   #Requête d'affichage des utilisateurs
+   listes=User.query.order_by(User.id.desc()).all()
+   return render_template('user/index.html',title=title, liste=listes)
 
-# """ Liste des types """
-# @categorie.route('/liste', methods=['GET', 'POST'])
-# def index():
-#    #Titre
-#    title=title_page('Catégorie')
-#    #Requête d'affichage de la categorisation
-#    listes=Categorie.query.order_by(Categorie.id.desc()).all()
+
+""" Statut"""
+@user.route('/statut/<int:user_id>', methods=['GET', 'POST'])
+def statut(user_id):
+   #Titre
+   title=title_page('Catégorie')
+   #Requête de vérification de l'utilisateur
+   user_statu=User.query.filter_by(id=user_id).first()
+
+   if user_statu is None:
+      return redirect(url_for('user.index'))
+
+   if user_statu.statut == True:
+      user_statu.statut=False
+      db.session.commit()
+      flash("{} est désactivé".format(user_statu.prenom),'primary')
+      return redirect(url_for('user.index'))
+   else:
+      user_statu.statut=True
+      db.session.commit()
+      flash("{} est activé".format(user_statu.prenom),'primary')
+      return redirect(url_for('categorie.index'))
    
+   return render_template('user/index.html',title=title)
 
-#    return render_template('categorie/index.html',title=title, liste=listes)
 
+""" Modifier"""
+@user.route('/<int:user_id>', methods=['GET', 'POST'])
+def edit(user_id):
+   form=EditUserForm()
+   #Titre
+   title=title_page('Utilisateur')
+   #Requête de vérification de l'utlisateur
+   user_class=User.query.filter_by(id=user_id).first()
+   #Le nom du type encours de modification
+   user_nom=user_class.prenom
+
+   if user_nom is None:
+      return redirect(url_for('user.index'))
+   
+   if form.validate_on_submit(): 
+      user_class.nom=form.nom.data.upper()
+      user_class.post_nom=form.post_nom.data.upper()
+      user_class.prenom=form.prenom.data.capitalize()
+      user_class.role=form.role.data
+      db.session.commit()
+      flash("Modification réussie",'primary')
+      return redirect(url_for('user.index'))
+      
+   if request.method=='GET':
+      form.nom.data=user_class.nom
+      form.post_nom.data=user_class.post_nom
+      form.prenom.data=user_class.prenom
+      form.role.data=user_class.role
+      
+   return render_template('user/edit.html', form=form, title=title, user_nom=user_nom)
+
+
+
+""" Profil """
+@user.route('/profil', methods=['GET', 'POST'])
+def profi():
+   #Titre
+   title=title_page("Utilisateur")
+   #Requête d'affichage des utilisateurs
+   listes=User.query.order_by(User.id.desc()).all()
+   return render_template('user/profil.html',title=title, liste=listes)
