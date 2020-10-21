@@ -1,6 +1,7 @@
-from flask import render_template, flash, url_for, redirect, request, session
+from flask import render_template, flash, url_for, redirect, request, session, g
 from .. import db, bcrypt
 from ..models import User
+import flask_sijax
 from app.user.forms import AjoutUserForm, EditUserForm
 from flask_login import login_user, current_user, logout_user, login_required
 from ..utilites.utility import title_page
@@ -98,12 +99,21 @@ def edit(user_id):
    return render_template('user/edit.html', form=form, title=title, user_nom=user_nom)
 
 
-
 """ Profil """
-@user.route('/profil', methods=['GET', 'POST'])
-def profi():
-   #Titre
-   title=title_page("Utilisateur")
-   #Requête d'affichage des utilisateurs
-   listes=User.query.order_by(User.id.desc()).all()
-   return render_template('user/profil.html',title=title, liste=listes)
+@flask_sijax.route(user, '/profil')
+def profil():
+      def register(obj_response):
+         title=title_page("Utilisateur")
+         listes=User.query.order_by(User.id.desc()).all()
+         data_timeline=render_template('sijax/timeline.html', liste=listes)
+         obj_response.html('#timeline',data_timeline)
+      if g.sijax.is_sijax_request:
+        return g.sijax.process_request()
+      else:
+         title=title_page("Utilisateur")
+         listes=User.query.order_by(User.id.desc()).all()
+         return render_template('user/profil.html',title=title, liste=listes)
+       
+
+
+   

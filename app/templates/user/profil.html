@@ -414,72 +414,11 @@ body.menubar-top .profile-wrapper {
             <!-- Tab panes -->
             <div class="tab-content profile-tabs-content">
                 <div class="tab-pane active " id="profile-overview" role="tabpanel">
-                    <div class="post-editor">
-                        <textarea name="post-field" id="post-field" class="post-field" placeholder="Write Something Cool!"></textarea>
-                        <div class="d-flex">
-                            <button class="btn btn-success px-4 py-1">Post</button>
-                        </div>
-                    </div>
                     <!-- /.post-editor -->
-                    <div class="stream-posts">
-                        <div class="stream-post">
-                            <div class="sp-author">
-                                <a href="#" class="sp-author-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt=""></a>
-                                <h6 class="sp-author-name"><a href="#">John Doe</a></h6></div>
-                            <div class="sp-content">
-                                <div class="sp-info">posted 1h ago</div>
-                                <p class="sp-paragraph mb-0">Auk Soldanella plainscraft acetonylidene wolfishness irrecognizant Candolleaceae provision Marsipobranchii arpen Paleoanthropus supersecular inidoneous autoplagiarism palmcrist occamy equestrianism periodontoclasia mucedin overchannel goelism decapsulation pourer zira</p>
-                            </div>
-                            <!-- /.sp-content -->
-                        </div>
-                        <!-- /.stream-post -->
-                        <div class="stream-post">
-                            <div class="sp-author">
-                                <a href="#" class="sp-author-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt=""></a>
-                                <h6 class="sp-author-name"><a href="#">Palmira Guthridge</a></h6></div>
-                            <div class="sp-content">
-                                <div class="sp-info">posted 1h ago</div>
-                                <p class="sp-paragraph mb-0">Auk Soldanella plainscraft acetonylidene wolfishness irrecognizant Candolleaceae provision Marsipobranchii arpen Paleoanthropus supersecular inidoneous autoplagiarism palmcrist occamy equestrianism periodontoclasia mucedin overchannel goelism decapsulation pourer zira</p>
-                            </div>
-                            <!-- /.sp-content -->
-                        </div>
-                        <!-- /.stream-post -->
-                        <div class="stream-post">
-                            <div class="sp-author">
-                                <a href="#" class="sp-author-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt=""></a>
-                                <h6 class="sp-author-name"><a href="#">Meghann Fraser</a></h6></div>
-                            <div class="sp-content">
-                                <div class="sp-info">posted 2h ago</div>
-                                <p class="sp-paragraph mb-0">Auk Soldanella plainscraft acetonylidene wolfishness irrecognizant Candolleaceae provision Marsipobranchii arpen Paleoanthropus supersecular inidoneous autoplagiarism palmcrist occamy equestrianism periodontoclasia mucedin overchannel goelism decapsulation pourer zira</p>
-                            </div>
-                            <!-- /.sp-content -->
-                        </div>
-                        <!-- /.stream-post -->
-                        <div class="stream-post">
-                            <div class="sp-author">
-                                <a href="#" class="sp-author-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt=""></a>
-                                <h6 class="sp-author-name"><a href="#">Kent Lemaitre</a></h6></div>
-                         <div class="sp-content">
-                                <div class="sp-info">posted 1h ago</div>
-                                <p class="sp-paragraph mb-0">Auk Soldanella plainscraft acetonylidene wolfishness irrecognizant Candolleaceae provision Marsipobranchii arpen Paleoanthropus supersecular inidoneous autoplagiarism palmcrist occamy equestrianism periodontoclasia mucedin overchannel goelism decapsulation pourer zira</p>
-                            </div>
-                            <!-- /.sp-content -->
-                        </div>
-                        <!-- /.stream-post -->
-                        <div class="stream-post mb-0">
-                            <div class="sp-author">
-                                <a href="#" class="sp-author-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt=""></a>
-                                <h6 class="sp-author-name"><a href="#">Loria Lambing</a></h6></div>
-                            <div class="sp-content">
-                                <div class="sp-info">posted 2 days ago</div>
-                                <p class="sp-paragraph">Auk Soldanella plainscraft acetonylidene wolfishness irrecognizant Candolleaceae provision Marsipobranchii arpen Paleoanthropus supersecular inidoneous</p>
-                                <p class="sp-paragraph">autoplagiarism palmcrist occamy equestrianism periodontoclasia mucedin overchannel goelism decapsulation pourer zira</p>
-                            </div>
-                            <!-- /.sp-content -->
-                        </div>
-                        <!-- /.stream-post -->
+                    <div id='timeline'>
+                        {% include 'sijax/timeline.html'%}
                     </div>
-                    <!-- /.stream-posts -->
+                    
                 </div>
                 <div class="tab-pane" id="pro" role="tabpanel">
                     <div class="post-editor">
@@ -496,4 +435,10 @@ body.menubar-top .profile-wrapper {
         <!-- /.profile-section-main -->
     </div>
 </div>
+{%endblock%}
+{% block jsblock %}
+<script type="text/javascript" src="/static/js/sijax/sijax.js"></script>
+<script type="text/javascript">
+    {{ g.sijax.get_js()|safe }}
+</script>
 {%endblock%}
