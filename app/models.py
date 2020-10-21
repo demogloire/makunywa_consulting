@@ -126,6 +126,14 @@ class Commentaire(db.Model):
     def __repr__(self):
         return ' {} '.format(self.commentaire)
 
+class Historique(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    message = db.Column(db.Text)
+    pseudonyme = db.Column(db.String(128))
+    date_mod=db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    def __repr__(self):
+        return ' {} '.format(self.message)
+
 
 
 
