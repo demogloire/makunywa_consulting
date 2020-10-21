@@ -68,9 +68,9 @@
                                             <td> {{categorie.nom}} </td>
                                             <td class="text-center">
                                               {%if categorie.statut==True%}
-                                              <a href="{{url_for('categorie.statut', cat_id=categorie.id)}}"><i class="fa fa-lock" aria-hidden="true"></i></a>
-                                              {%else%}
                                               <a href="{{url_for('categorie.statut', cat_id=categorie.id)}}"><i class="fa fa-unlock" aria-hidden="true"></i></a>
+                                              {%else%}
+                                              <a href="{{url_for('categorie.statut', cat_id=categorie.id)}}"><i class="fa fa-lock" aria-hidden="true"></i></a>
                                               {%endif%}
                                             </td>
                                             <td class="text-center"><a href="{{url_for('categorie.edit', cate_id=categorie.id)}}"><i class="fa fa-edit" aria-hidden="true"></i></a></td>

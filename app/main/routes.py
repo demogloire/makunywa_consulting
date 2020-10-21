@@ -7,6 +7,6 @@ from . import main
 
 @main.route("/")
 @login_required
-def dashborad():
+def dashboard():
     return 'login'
 

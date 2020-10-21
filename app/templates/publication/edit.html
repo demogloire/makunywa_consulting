@@ -1,0 +1,109 @@
+    {% extends "layout/admin.html" %}
+    {% block body %}
+        <div class="row">
+          <div class="col-md-12 mt-5"> 
+            <div class="row justify-content-center">
+              <div class="col-md-8">
+                <div class="card card-outline-secondary box-shadow--3dp">
+                  <div class="card-body">
+                    <h3><b>Modifier utilisateur</b></h3> <br>
+                    
+                                            {% with messages= get_flashed_messages(with_categories=true) %}
+                                            {% if messages  %}
+                                            {% for category, message in messages %}
+                                            {%if category!="danger"%}
+                                                <div class="alert round bg-{{ category }} alert-icon-left alert-dismissible mb-2" role="alert">
+                                                    <span class="alert-icon">
+                                                        <i class="fa fa-thumbs-o-up"></i>
+                                                    </span>
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    <strong class="text-gray-900">{{ message }}!</strong> 
+                                                    
+                                                </div>
+                                            {%else%}
+                                                <div class="alert round bg-{{ category }} alert-icon-left alert-dismissible mb-2" role="alert">
+                                                    <span class="alert-icon">
+                                                        <i class="fa fa-thumbs-o-down"></i>
+                                                    </span>
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    <strong class="text-gray-900">{{ message }}!</strong>
+                                                    
+                                                </div>
+                                            {%endif%}
+                                            
+                                            {% endfor %}
+                                            {% endif %}
+                                            {% endwith %}
+                    <form class="user" method="POST">
+                      {{ form.csrf_token }}
+                        <div class="form-group row">
+                          <div class="col-md-5">
+                            {% if form.prenom.errors %}
+                            {{ form.prenom(class="form-control form-control form-control-user input-md is-invalid", placeholder="Prénom")}}
+                            <div class="invalid-feedback">
+                                {% for error in form.prenom.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.prenom(class="form-control form-control form-control-user input-md", placeholder="Prénom")}}
+                            {% endif %}
+                          </div>
+                          <div class="col-md-7">
+                            {% if form.nom.errors %}
+                            {{ form.nom(class="form-control form-control form-control-user input-md is-invalid", placeholder="Nom")}}
+                            <div class="invalid-feedback">
+                                {% for error in form.nom.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.nom(class="form-control form-control form-control-user input-md", placeholder="Nom")}}
+                            {% endif %}
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <div class="col-md-7">
+                            {% if form.post_nom.errors %}
+                            {{ form.post_nom(class="form-control form-control form-control-user input-md is-invalid", placeholder="Post-nom")}}
+                            <div class="invalid-feedback">
+                                {% for error in form.post_nom.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.post_nom(class="form-control form-control form-control-user input-md", placeholder="Post-nom")}}
+                            {% endif %}
+                          </div>
+                          <div class="col-md-5">
+                            {% if form.role.errors %}
+                            {{ form.role(class="form-control form-control   input-md is-invalid")}}
+                            <div class="invalid-feedback">
+                                {% for error in form.role.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.role(class="form-control form-control  input-md")}}
+                            {% endif %}
+                          </div>
+                        </div>
+                        <div class="text-center mb-1">
+                            <button class="btn btn-primary btn-min-width mr-1 mb-1" id="submit" name="submit" type="submit">
+                                <i class="fa fa-edit"></i> Modifier
+                            </button>
+                            <a class="btn btn-danger " href="{{url_for('user.index')}}  "><i class="fa fa-times"></i> Annuler</a>     
+                        </div>
+                      </form>
+                  </div><!--/card-block-->
+                </div><!-- /form card login -->
+              </div>
+            </div>
+          </div><!--/col-->
+        </div><!--/row-->
+    {% endblock body %}

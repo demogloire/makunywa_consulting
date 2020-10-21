@@ -1,0 +1,159 @@
+    {% extends "layout/admin.html" %}
+
+{% block summurnote %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='summnernote/summernote-lite.css')}} ">
+<script src="{{ url_for('static', filename='summnernote/summernote-lite.js')}}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='select2/select2.css')}}">
+{% endblock  %}
+
+    {% block body %}
+        <div class="row">
+          <div class="col-md-12 mt-5"> 
+            <div class="row justify-content-left">
+              <div class="col-md-8">
+                <div class="card card-outline-secondary box-shadow--3dp">
+                  <div class="card-body">
+                    <h3><b>Ajouter un utilisateur</b></h3> <br>
+                    {% with messages= get_flashed_messages(with_categories=true) %}
+                    {% if messages  %}
+                    {% for category, message in messages %}
+                    {%if category!="danger"%}
+                        <div class="alert round bg-{{ category }} alert-icon-left alert-dismissible mb-2" role="alert">
+                            <span class="alert-icon">
+                                <i class="fa fa-thumbs-o-up"></i>
+                            </span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <strong class="text-gray-900">{{ message }}!</strong> 
+                            
+                        </div>
+                    {%else%}
+                        <div class="alert round bg-{{ category }} alert-icon-left alert-dismissible mb-2" role="alert">
+                            <span class="alert-icon">
+                                <i class="fa fa-thumbs-o-down"></i>
+                            </span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <strong class="text-gray-900">{{ message }}!</strong>
+                            
+                        </div>
+                    {%endif%}
+                    
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}                    
+                                            
+                    <form  method="POST" enctype="multipart/form-data">
+                      {{ form.csrf_token }}
+                        <div class="form-group row">
+                          <div class="col-md-7">
+                            {% if form.titre.errors %}
+                            {{ form.titre(class="form-control form-control form-control-user input-md is-invalid", placeholder="Titre de la publication")}}
+                            <div class="invalid-feedback">
+                                {% for error in form.titre.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.titre(class="form-control  input-md", placeholder="Titre de la publication")}}
+                            {% endif %}
+                          </div>
+                          <div class="col-md-5">
+                            {% if form.categorie.errors %}
+                            {{ form.categorie(class="form-control  input-md js-example-basic-single is-invalid", placeholder="Nom de la categorie",style="height: 100%")}}
+                            <div class="invalid-feedback">
+                                {% for error in form.categorie.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.categorie(class="form-control js-example-basic-single input-md", placeholder="Nom de la categorie",style="height: 100%")}}
+                            {% endif %}
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <div class="col-md-12">
+                            {% if form.resume.errors %}
+                                        {{ form.resume(id="summernote")}}
+                                        <i class="form-group__bar"></i>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.resume.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.resume(id="summernote")}}
+                                        <i class="form-group__bar"></i>
+                                        {% endif %}
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <div class="col-md-6">
+                            <div class="custom-file">
+                            {% if form.image_article.errors %}
+                            {{ form.image_article(class="custom-file-input input-md form-control-user is-invalid")}}
+                            <div class="invalid-feedback">
+                                {% for error in form.image_article.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.image_article(class="custom-file-input input-md form-control-user input-md")}}
+                            {% endif %}
+                              <label class="custom-file-label" for="customFile">Choisir image de la publication</label>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="custom-file">
+                              {% if form.pdf_document.errors %}
+                              {{ form.pdf_document(class="custom-file-input input-md form-control-user is-invalid")}}
+                              <div class="invalid-feedback">
+                                  {% for error in form.pdf_document.errors %}
+                                      <span>{{ error }}</span>
+                                  {% endfor %}
+                              </div>
+                              {% else %}
+                              {{ form.pdf_document(class="custom-file-input input-md form-control-user input-md")}}
+                              {% endif %}
+                              <label class="custom-file-label" for="customFile">Choisir le document PDF</label>
+                              </div>
+                          </div>
+                        </div>
+
+                        <div class="text-center mb-1">
+                            <button class="btn btn-primary btn-min-width mr-1 mb-1" id="submit" name="submit" type="submit">
+                                <i class="la la-folder-o"></i> Enregistrer
+                            </button>
+                            <a class="btn btn-danger " href="{{url_for('user.index')}}  ">Annuler</a>     
+                        </div>
+                      </form>
+                  </div><!--/card-block-->
+                </div><!-- /form card login -->
+              </div>
+            </div>
+          </div><!--/col-->
+        </div><!--/row-->
+
+    {% endblock body %}
+
+
+    {%block jsblock%}
+        <script>    
+          $('#summernote').summernote({
+          height: 300,                 // set editor height
+          minHeight: null,             // set minimum height of editor
+          maxHeight: null,             // set maximum height of editor
+          focus: true                  // set focus to editable area after initializing summernote
+          });
+      
+          $(document).ready(function() {
+          $('.js-example-basic-single').select2();
+          $('.js-example-basic-singled').select2();
+          });
+      </script>
+   
+    {%endblock%}

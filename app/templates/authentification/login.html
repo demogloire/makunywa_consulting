@@ -8,9 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-
-  <title>SB Admin 2 - Login</title>
-
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -18,12 +15,12 @@
 <!-- Custom styles for this template-->
 <link href="{{ url_for('static', filename='admin/css/sb-admin-2.min.css')}}" rel="stylesheet">
 <link href="{{ url_for('static', filename='style.css')}}" rel="stylesheet">
-{% block summurnote %}{%endblock%}
-{% if title %}
-  <title>  {{ title }} </title>
-{% else %}
-  <title> Login | Makunya Consulting </title>
-{% endif %}
+  {% block summurnote %}{%endblock%}
+  {% if title %}
+    <title>  {{ title }} </title>
+  {% else %}
+    <title> Login | Makunya Consulting </title>
+  {% endif %}
 
 </head>
 
@@ -43,26 +40,75 @@
               <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
               <div class="col-lg-6">
                 <div class="p-5">
-                    
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                   </div><br><br>
-                  <form class="user">
-                    <div class="form-group">
-                      <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                  {% with messages= get_flashed_messages(with_categories=true) %}
+                {% if messages  %}
+                {% for category, message in messages %}
+                {%if category!="danger"%}
+                    <div class="alert round bg-{{ category }} alert-icon-left alert-dismissible mb-2" role="alert">
+                        <span class="alert-icon">
+                            <i class="fa fa-thumbs-o-up"></i>
+                        </span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>{{ message }}!</strong> 
+                        
                     </div>
-                    <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                {%else%}
+                    <div class="alert round bg-{{ category }} alert-icon-left alert-dismissible mb-2" role="alert">
+                        <span class="alert-icon">
+                            <i class="fa fa-thumbs-o-down"></i>
+                        </span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>{{ message }}!</strong>
+                        
                     </div>
+                {%endif%}
+                
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+                  <form class="user" method="POST">
+                    {{ form.csrf_token }}
+                    <div class="form-group">
+                      {% if form.username.errors %}
+                        {{ form.username(class="form-control form-control form-control-user input-md is-invalid", placeholder="Adresse mail")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.username(class="form-control form-control form-control-user input-md", placeholder="Adresse mail")}}
+                        {% endif %}
+                      </div>
+                    <div class="form-group">
+                      {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control form-control-user input-md is-invalid", placeholder="Mot de passe")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.password(class="form-control form-control form-control-user input-md", placeholder="Mot de passe")}}
+                        {% endif %}
+                      </div>
+
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Remember Me</label>
+                        {{ form.remember(class="custom-control-input", id="customCheck")}}
+                        <label class="custom-control-label" for="customCheck">Souvenez-vous</label>
                       </div>
                     </div>
-                    <a href="index.html" class="btn btn-primary btn-user btn-block">
-                      Login
-                    </a>
+                    <button class="btn btn-primary btn-user btn-block" id="submit" name="submit" type="submit">
+                      Connexion
+                  </button>
                     <br><br><br>
                   </form>
                 </div>
