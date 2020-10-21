@@ -1,6 +1,6 @@
 from flask import render_template, flash, url_for, redirect, request, session
 from .. import db, bcrypt
-from ..models import Categorie
+from ..models import Categorie, Publication
 from app.publication.forms import AjoutPubForm
 from flask_login import login_user, current_user, logout_user, login_required
 from ..utilites.utility import title_page
@@ -15,6 +15,11 @@ def ajoutcate():
    title='Publication | Makunywa Consulting'
    #formulaire
    form=AjoutPubForm()
+   #Vérfication des catégories existant
+   ver_categorie=Categorie.query.filter_by(statut=True).first()
+   if ver_categorie is None:
+      return redirect(url_for('categorie.ajoutcate'))
+
    if form.validate_on_submit():
           pass
    return render_template('publication/ajouter.html',  title=title, form=form)

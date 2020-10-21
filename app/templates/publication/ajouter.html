@@ -51,26 +51,26 @@
                         <div class="form-group row">
                           <div class="col-md-7">
                             {% if form.titre.errors %}
-                            {{ form.titre(class="form-control form-control form-control-user input-md is-invalid", placeholder="Titre de la publication")}}
+                            {{ form.titre(class="form-control form-control form-control-sm is-invalid", placeholder="Titre de la publication")}}
                             <div class="invalid-feedback">
                                 {% for error in form.titre.errors %}
                                     <span>{{ error }}</span>
                                 {% endfor %}
                             </div>
                             {% else %}
-                            {{ form.titre(class="form-control  input-md", placeholder="Titre de la publication")}}
+                            {{ form.titre(class="form-control  form-control-sm", placeholder="Titre de la publication")}}
                             {% endif %}
                           </div>
                           <div class="col-md-5">
                             {% if form.categorie.errors %}
-                            {{ form.categorie(class="form-control  input-md js-example-basic-single is-invalid", placeholder="Nom de la categorie",style="height: 100%")}}
+                            {{ form.categorie(class="form-control  form-control-lg js-example-basic-single is-invalid", placeholder="Nom de la categorie",style="height: 100%")}}
                             <div class="invalid-feedback">
                                 {% for error in form.categorie.errors %}
                                     <span>{{ error }}</span>
                                 {% endfor %}
                             </div>
                             {% else %}
-                            {{ form.categorie(class="form-control js-example-basic-single input-md", placeholder="Nom de la categorie",style="height: 100%")}}
+                            {{ form.categorie(class="form-control js-example-basic-single form-control-lg ", placeholder="Nom de la categorie",style="height: 100%")}}
                             {% endif %}
                           </div>
                         </div>

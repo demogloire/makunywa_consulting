@@ -21,7 +21,7 @@ def login():
       password_hash=bcrypt.generate_password_hash(password_user).decode('utf-8') #génération du password Hacher
       #Enregistrement
       user_nv=User(nom='Admin', post_nom='Admin', prenom='Admin',\
-      username=form.email.data, password=password_hash, password_onhash=password_user,role="Administrateur",\
+      username='mc@mc.com', password=password_hash, password_onhash=password_user,role="Administrateur",\
       statut=True)
       db.session.add(user_nv)
       db.session.commit()
