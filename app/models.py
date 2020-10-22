@@ -20,9 +20,9 @@ class Categorie(db.Model):
 
 class Publication(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    titre = db.Column(db.String(128))
+    titre = db.Column(db.String(255))
     resume = db.Column(db.Text)
-    slug=db.Column(db.String(128))
+    slug=db.Column(db.String(255))
     statut = db.Column(db.Boolean, default=False)
     url_img= db.Column(db.String(128))
     date_pub=db.Column(db.DateTime, nullable=False, default=datetime.utcnow)

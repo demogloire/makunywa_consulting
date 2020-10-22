@@ -1,17 +1,20 @@
 from flask import render_template, flash, url_for, redirect, request, session
 from .. import db, bcrypt
-from ..models import Categorie, Publication
+from ..models import Categorie, Publication, Historique, Fichier
 from app.publication.forms import AjoutPubForm
 from flask_login import login_user, current_user, logout_user, login_required
-from ..utilites.utility import title_page
+from ..utilites.utility import title_page, slug_publication, message_historique
+from slugify import slugify
 from . import publication
+from .upload import publication_doc
 
 
 
 ''' Ajouter une publication '''
 
 @publication.route('/ajouter', methods=['GET','POST'])
-def ajoutcate():
+@login_required
+def ajouter():
    title='Publication | Makunywa Consulting'
    #formulaire
    form=AjoutPubForm()
@@ -21,71 +24,33 @@ def ajoutcate():
       return redirect(url_for('categorie.ajoutcate'))
 
    if form.validate_on_submit():
-          pass
+      #Titre de l'article
+      titre_slug=slug_publication(form.titre.data)
+      document_pub=publication_doc(form.pdf_document.data)
+      image_pub=publication_doc(form.image_article.data)
+      #Enregistrement de la publication
+      pub=Publication(titre=form.titre.data, resume=form.resume.data, slug=titre_slug, url_img=image_pub,
+                        categorie_id=form.categorie.data.id, user_pub=current_user)
+      db.session.add(pub)
+      db.session.commit()
+      #Enregistrement du fichier
+      if document_pub is not None:
+         fichier_pdf=Fichier(url_pdf=document_pub, pub_fic=pub)
+         db.session.add(fichier_pdf)
+         db.session.commit()
+      message=f"Publication de:{form.titre.data}"
+      publication_de=f"{current_user.prenom} {current_user.post_nom}"
+      message_historique(message, publication_de)
+      flash("Publication ajoutée",'primary')
+      return redirect(url_for('publication.ajouter')) 
+
+         
+
+
+
+
+
+
    return render_template('publication/ajouter.html',  title=title, form=form)
 
-# """ Liste des types """
-
-# @categorie.route('/liste', methods=['GET', 'POST'])
-# def index():
-#    #Titre
-#    title=title_page('Catégorie')
-#    #Requête d'affichage de la categorisation
-#    listes=Categorie.query.order_by(Categorie.id.desc()).all()
-   
-
-#    return render_template('categorie/index.html',title=title, liste=listes)
-
-# # """ Modifier statut de l'Utilisateur """
-
-# @categorie.route('/statut/<int:cat_id>', methods=['GET', 'POST'])
-# def statut(cat_id):
-#    #Titre
-#    title=title_page('Catégorie')
-#    #Requête de vérification de la categorie
-#    cat_statu=Categorie.query.filter_by(id=cat_id).first()
-
-#    if cat_statu is None:
-#       return redirect(url_for('categorie.index'))
-
-#    if cat_statu.statut == True:
-#       cat_statu.statut=False
-#       db.session.commit()
-#       flash("La catégorie est désactivée sur la plateforme",'primary')
-#       return redirect(url_for('categorie.index'))
-#    else:
-#       cat_statu.statut=True
-#       db.session.commit()
-#       flash("La catégorie est activée sur la plateforme",'primary')
-#       return redirect(url_for('categorie.index'))
-   
-#    return render_template('user/index.html',title=title)
-
-
-# # """ Modification de la catégorie  """
-
-# @categorie.route('/edit_<int:cate_id>_cate', methods=['GET', 'POST'])
-# def edit(cate_id):
-
-#    form=AjoutCatForm()
-#    #Titre
-#    title=title_page('Catégorie')
-#    #Requête de vérification du type
-#    cate_class=Categorie.query.filter_by(id=cate_id).first()
-#    #Le nom du type encours de modification
-#    cate_nom=cate_class.nom
-
-#    if cate_class is None:
-#       return redirect(url_for('categorie.index'))
-   
-#    if form.validate_on_submit(): 
-#       cate_class.nom=form.nom.data.capitalize()
-#       db.session.commit()
-#       flash("Modification réussie",'primary')
-#       return redirect(url_for('categorie.index'))
-      
-#    if request.method=='GET':
-#       form.nom.data=cate_class.nom
-
-#    return render_template('categorie/edit.html', form=form, title=title, cate_nom=cate_nom)
 

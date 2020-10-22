@@ -15,7 +15,7 @@ class AjoutPubForm(FlaskForm):
     titre= StringField('Titre', validators=[DataRequired("Completer le titre"),  Length(min=2, max=255, message="Veuillez respecté les caractères")])
     resume= TextAreaField('Resume', validators=[DataRequired("Completer le resumé")])
     categorie= QuerySelectField(query_factory=rech_categorie, get_label='nom', allow_blank=False)
-    image_article = FileField('Image', validators=[FileAllowed(['jpg','png'],'Seul jpg est autorisé')])
+    image_article = FileField('Image', validators=[FileAllowed(['jpg','png'],'Seul jpg et png sont autorisé')])
     pdf_document = FileField('Image', validators=[FileAllowed(['pdf'],'Seul pdf est autorisé')])
     submit = SubmitField('Ajouter publication')
 
