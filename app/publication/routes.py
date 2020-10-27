@@ -1,21 +1,22 @@
 from flask import render_template, flash, url_for, redirect, request, session
 from .. import db, bcrypt
 from ..models import Categorie, Publication, Historique, Fichier
-from app.publication.forms import AjoutPubForm
+from app.publication.forms import AjoutPubForm, EditPubForm
 from flask_login import login_user, current_user, logout_user, login_required
 from ..utilites.utility import title_page, slug_publication, message_historique
 from slugify import slugify
 from . import publication
 from .upload import publication_doc
+import timeago
+from datetime import datetime
 
 
 
 ''' Ajouter une publication '''
-
 @publication.route('/ajouter', methods=['GET','POST'])
 @login_required
 def ajouter():
-   title='Publication | Makunywa Consulting'
+   title=title_page('Publication')
    #formulaire
    form=AjoutPubForm()
    #Vérfication des catégories existant
@@ -44,13 +45,56 @@ def ajouter():
       flash("Publication ajoutée",'primary')
       return redirect(url_for('publication.ajouter')) 
 
-         
-
-
-
-
-
-
    return render_template('publication/ajouter.html',  title=title, form=form)
 
+""" Liste des publications """
+@publication.route('/', methods=['GET', 'POST'])
+def index():
+   #Titre
+   title=title_page('Publication')
+   #Requête d'affichage des categoriesÒ
+   listes=Publication.query.order_by(Publication.id.desc()).all()
+   les_publications=[]
+   #Les publications
+   for liste in listes:
+      pub=[liste.id, liste.titre, liste.slug, liste.url_img, liste.nbr_lu, liste.nbr_like, liste.nbr_cmt, liste.user_pub.prenom, timeago.format(liste.date_mod, datetime.now() , 'fr')]
+      les_publications.append(pub)
 
+
+   print(les_publications,'chanteur malheur')
+   
+
+   return render_template('publication/index.html',title=title, liste=les_publications)
+
+""" Modification de la publication """
+
+@publication.route('/edit_<int:pub_id>_pub', methods=['GET', 'POST'])
+def edit(pub_id):
+
+   form=EditPubForm()
+   #Titre
+   title=title_page('Publication')
+   #Requête de vérification du type
+   pub_c=Publication.query.filter_by(id=pub_id).first()
+   #Titre de la publication
+   pub_titre=pub_c.titre
+
+   if pub_titre is None:
+      return redirect(url_for('publication.index'))
+   
+   if form.validate_on_submit():
+      titre_slug=slug_publication(form.titre.data) 
+      pub_c.titre=form.titre.data
+      pub_c.slug=titre_slug
+      pub_c.resume=form.resume.data
+      pub_c.categorie_id=form.categorie.data.id
+      db.session.commit()
+      flash("Modification réussie",'primary')
+      return redirect(url_for('publication.index'))
+      
+   if request.method=='GET':
+      form.titre.data=pub_c.titre
+      form.resume.data=pub_c.resume
+      form.categorie.data=pub_c.cat_pub
+
+   return render_template('publication/edit.html', form=form, title=title)

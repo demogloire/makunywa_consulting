@@ -26,7 +26,7 @@ def ajoutcate():
 
    return render_template('categorie/ajouter.html',  title=title, form=form)
 
-""" Liste des types """
+""" Liste de catégorie """
 
 @categorie.route('/liste', methods=['GET', 'POST'])
 def index():
@@ -34,7 +34,6 @@ def index():
    title=title_page('Catégorie')
    #Requête d'affichage de la categorisation
    listes=Categorie.query.order_by(Categorie.id.desc()).all()
-   
 
    return render_template('categorie/index.html',title=title, liste=listes)
 

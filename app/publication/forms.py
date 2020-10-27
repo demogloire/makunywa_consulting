@@ -20,3 +20,9 @@ class AjoutPubForm(FlaskForm):
     submit = SubmitField('Ajouter publication')
 
 
+class EditPubForm(FlaskForm):
+    titre= StringField('Titre', validators=[DataRequired("Completer le titre"),  Length(min=2, max=255, message="Veuillez respecté les caractères")])
+    resume= TextAreaField('Resume', validators=[DataRequired("Completer le resumé")])
+    categorie= QuerySelectField(query_factory=rech_categorie, get_label='nom', allow_blank=False)
+    submit = SubmitField('Ajouter publication')
+
