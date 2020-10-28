@@ -37,8 +37,7 @@ def index():
 
    return render_template('categorie/index.html',title=title, liste=listes)
 
-# """ Modifier statut de l'Utilisateur """
-
+""" Modifier statut de l'Utilisateur """
 @categorie.route('/statut/<int:cat_id>', methods=['GET', 'POST'])
 def statut(cat_id):
    #Titre

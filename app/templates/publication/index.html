@@ -9,77 +9,108 @@
 {%endblock%}
 
 {% block body %}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Les publications</h1>
+    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-plus fa-sm text-white-50"></i> Ajouter publication</a>
+</div>
 <div class="row">
-    {% with messages= get_flashed_messages(with_categories=true) %}
-    {% if messages  %}
-    {% for category, message in messages %}
-    {%if category!="danger"%}
-    <div class="alert round bg-{{ category }} alert-icon-left alert-dismissible mb-2" role="alert">
-        <span class="alert-icon">
-            <i class="fa fa-thumbs-o-up"></i>
-        </span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <strong class="text-gray-900">{{ message }}!</strong>
+    <div class="col-md-12">
+        {% with messages= get_flashed_messages(with_categories=true) %}
+        {% if messages  %}
+        {% for category, message in messages %}
+        {%if category!="danger"%}
+        <div class="alert round bg-{{ category }} alert-icon-left alert-dismissible mb-2" role="alert">
+            <span class="alert-icon">
+                <i class="fa fa-thumbs-o-up"></i>
+            </span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong class="text-gray-900">{{ message }}!</strong>
 
+        </div>
+        {%else%}
+        <div class="alert round bg-{{ category }} alert-icon-left alert-dismissible mb-2" role="alert">
+            <span class="alert-icon">
+                <i class="fa fa-thumbs-o-down"></i>
+            </span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong class="text-gray-900">{{ message }}!</strong>
+
+        </div>
+        {%endif%}
+
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
     </div>
-    {%else%}
-    <div class="alert round bg-{{ category }} alert-icon-left alert-dismissible mb-2" role="alert">
-        <span class="alert-icon">
-            <i class="fa fa-thumbs-o-down"></i>
-        </span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <strong class="text-gray-900">{{ message }}!</strong>
-
-    </div>
-    {%endif%}
-
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
-
-
+</div>
+<div class="row">
+    {%if taille>0 %}
     {%for listes in liste%}
     <div class="col-lg-4 mb-4">
         <div class="card box-shadow--3dp">
-            {%if listes[3] !=None%}
+            {%if listes.url_img !=None%}
             <div class="paysage">
-                <img src="{{url_for('static', filename='publication/{}'.format(listes[3]))}} " alt="" height="215"
+                <img src="{{url_for('static', filename='publication/{}'.format(listes.url_img))}} " alt="" height="215"
                     width="367" class="card-img-top img-fluid">
             </div>
             {%endif%}
             <div class="card-body">
-                <h5 class="card-title"> {{listes[1]}} </h5>
+                <h5 class="card-title"> {{listes.titre}} </h5>
                 <div class="card-text">
                     <div class="text-left">
-                        <a href="{{url_for('publication.edit', pub_id=listes[0])}} "
+                        <a data-toggle="popover" data-trigger="hover" data-content="Editer pub." href="{{url_for('publication.edit', pub_id=listes.id)}} "
                             class="btn btn-outline-success btn-sm">Editer</a>
-                        <a href="" class="btn btn-outline-warning btn-sm"><i class="fa fa-camera"></i></a>
-                        <a href="" class="btn btn-outline-info btn-sm"><i class="far fa-file"></i></a>
+                        <a data-toggle="popover" data-trigger="hover" data-content="Editer img."  href="{{url_for('publication.edit_image', pub_id=listes.id)}}"
+                            class="btn btn-outline-warning btn-sm"><i class="fa fa-camera"></i></a>
+                        <a data-toggle="popover" data-trigger="hover" data-content="Editer pdf"  href="{{url_for('publication.edit_pdf', pub_id=listes.id)}}" class="btn btn-outline-info btn-sm"><i class="far fa-file"></i></a>
+                        {%if listes.statut==True%}
+                        <a data-toggle="popover" data-trigger="hover" data-content="Active"  class="btn btn-outline-success btn-sm" href="{{url_for('publication.statut', pub_id=listes.id)}}"><i class="fa fa-unlock"
+                                aria-hidden="true"></i></a>
+                        {%else%}
+                        <a data-toggle="popover" data-trigger="hover" data-content="Inactif"  class="btn btn-outline-danger btn-sm" href="{{url_for('publication.statut', pub_id=listes.id)}}"><i class="fa fa-lock"
+                                aria-hidden="true"></i></a>
+                        {%endif%}
                     </div>
+                    <br>
                     <div class="text-right">
                         <a href="" class="btn btn-outline-danger btn-sm"><i class="far fa-thumbs-up"></i> <span
-                                class="badge badge-pill badge-success"> {{listes[5]}} </span> </a>
+                                class="badge badge-pill badge-success"> {{listes.nbr_like}} </span> </a>
                         <a href="" class="btn btn-outline-warning btn-sm"><i class="far fa-eye"></i> <span
-                                class="badge badge-pill badge-danger"> {{listes[4]}} </span> </a>
+                                class="badge badge-pill badge-danger"> {{listes.nbr_lu}} </span> </a>
                         <a href="" class="btn btn-outline-dark btn-sm"><i class="far fa-comments"></i> <span
-                                class="badge badge-pill badge-info"> {{listes[6]}} </span> </a>
+                                class="badge badge-pill badge-info"> {{listes.nbr_cmt}} </span> </a>
                     </div>
                 </div>
 
                 <hr>
                 <div class="card-text">
 
-                    <a href="#" class="card-link pull-left">{{listes[7]}} </a>
-                    <a href="#" class="card-link pull-right">Publier {{listes[8]}}</a>
+                    <a href="#" class="card-link pull-left">{{listes.user_pub.prenom}} </a>
+                    {%if listes.date_pub==listes.date_mod%}
+                    <a href="#" class="card-link pull-right">Ajouter le {{listes.date_pub.strftime('%d-%m-%Y')}} </a>
+                    {%else%}
+                    <a href="#" class="card-link pull-right">Modifier {{listes.date_mod.strftime('%d-%m-%Y')}} </a>
+                    {%endif%}
+
                 </div>
 
             </div>
         </div>
     </div>
     {%endfor%}
+    {%endif%}
 </div>
 {% endblock body %}
+
+{%block jsblock%}
+<script>
+    $(document).ready(function(){
+      $('[data-toggle="popover"]').popover();   
+    });
+</script>
+{%endblock%}

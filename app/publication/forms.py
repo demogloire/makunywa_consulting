@@ -26,3 +26,12 @@ class EditPubForm(FlaskForm):
     categorie= QuerySelectField(query_factory=rech_categorie, get_label='nom', allow_blank=False)
     submit = SubmitField('Ajouter publication')
 
+
+class AjMediaForm(FlaskForm):
+    image_article = FileField('Image', validators=[FileAllowed(['jpg','png'],'Seul jpg est autorisé')])
+    submit = SubmitField('Publier')
+
+class AjPDFForm(FlaskForm):
+    image_article = FileField('Image', validators=[FileAllowed(['pdf'],'Seul pdf est autorisé')])
+    submit = SubmitField('Publier')
+

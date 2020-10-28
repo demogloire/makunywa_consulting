@@ -11,10 +11,12 @@
         <div class="row">
           <div class="col-md-12 mt-5"> 
             <div class="row justify-content-center">
-              <div class="col-md-10">
+              <div class="col-md-8">
                 <div class="card card-outline-secondary box-shadow--3dp">
                   <div class="card-body">
-                    <h3><b>Ajouter une publication</b></h3> <br>
+                    <h3><b>Modification du PDF de la publication</b></h3> 
+                    <small> {{titre}} </small>
+                    <br>
                     {% with messages= get_flashed_messages(with_categories=true) %}
                     {% if messages  %}
                     {% for category, message in messages %}
@@ -48,53 +50,11 @@
                                             
                     <form  method="POST" enctype="multipart/form-data">
                       {{ form.csrf_token }}
-                        <div class="form-group row">
-                          <div class="col-md-7">
-                            {% if form.titre.errors %}
-                            {{ form.titre(class="form-control form-control form-control-sm input-md is-invalid", placeholder="Titre de la publication")}}
-                            <div class="invalid-feedback">
-                                {% for error in form.titre.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                            {% else %}
-                            {{ form.titre(class="form-control  form-control-sm ", placeholder="Titre de la publication")}}
-                            {% endif %}
-                          </div>
-                          <div class="col-md-5">
-                            {% if form.categorie.errors %}
-                            {{ form.categorie(class="form-control  input-md js-example-basic-single is-invalid", placeholder="Nom de la categorie",style="height: 100%")}}
-                            <div class="invalid-feedback">
-                                {% for error in form.categorie.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                            {% else %}
-                            {{ form.categorie(class="form-control js-example-basic-single input-md", placeholder="Nom de la categorie",style="height: 100%")}}
-                            {% endif %}
-                          </div>
-                        </div>
 
                         <div class="form-group row">
                           <div class="col-md-12">
-                            {% if form.resume.errors %}
-                                        {{ form.resume(id="summernote")}}
-                                        <i class="form-group__bar"></i>
-                                        <div class="invalid-feedback">
-                                            {% for error in form.resume.errors %}
-                                                <span>{{ error }}</span>
-                                            {% endfor %}
-                                        </div>
-                                        {% else %}
-                                        {{ form.resume(id="summernote")}}
-                                        <i class="form-group__bar"></i>
-                                        {% endif %}
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <div class="col-md-6">
                             <div class="form-group">
-                              <label class="control-label mb-1" > <small>Image de l'article en jpg et png</small> </label>
+                              <label class="control-label mb-1" > <small>Le document en PDF seuelement</small> </label>
                               {% if form.image_article.errors %}
                               {{ form.image_article(class="form-control is-invalid")}}
                               <i class="form-group__bar"></i>
@@ -109,28 +69,12 @@
                               {% endif %}
                           </div>
                           </div>
-                          <div class="col-md-6">
-                            <div class="form-group">
-                              <label class="control-label mb-1" > <small>Document PDF</small> </label>
-                              {% if form.pdf_document.errors %}
-                              {{ form.pdf_document(class="form-control is-invalid")}}
-                              <i class="form-group__bar"></i>
-                              <div class="invalid-feedback">
-                                  {% for error in form.pdf_document.errors %}
-                                      <span>{{ error }}</span>
-                                  {% endfor %}
-                              </div>
-                              {% else %}
-                              {{ form.pdf_document(class="form-control")}}
-                              <i class="form-group__bar"></i>
-                              {% endif %}
-                          </div>
-                          </div>
+
                         </div>
 
                         <div class="text-center mb-1">
                             <button class="btn btn-primary btn-min-width mr-1 mb-1" id="submit" name="submit" type="submit">
-                                <i class="la la-folder-o"></i> Enregistrer
+                                <i class="la la-folder-o"></i> Modifier
                             </button>
                             <a class="btn btn-danger " href="{{url_for('publication.index')}}  ">Annuler</a>     
                         </div>

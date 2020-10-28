@@ -20,3 +20,20 @@ def publication_doc(document):
     picture_path = os.path.join(app.root_path, 'static/publication', picture_fn)
     document.save(picture_path)
     return picture_fn
+
+#Enregistrement du fichier 
+def save_image_mod(form_picture, ancien):
+    random_hex = secrets.token_hex(8)
+    _, f_ext = os.path.splitext(form_picture.filename)
+    picture_fn = random_hex + f_ext
+    #Suppression de l'ancien fichier
+    if ancien is not None:
+        chemin_offre=os.path.join(app.root_path, 'static/publication', ancien)
+        if os.path.exists(chemin_offre):
+            os.remove(chemin_offre)
+        else:
+            pass
+    #Enregitrement du nouveau fichier
+    picture_path = os.path.join(app.root_path, 'static/publication', picture_fn)
+    form_picture.save(picture_path)
+    return picture_fn
