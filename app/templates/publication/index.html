@@ -11,7 +11,7 @@
 {% block body %}
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Les publications</h1>
-    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+    <a href="{{url_for('publication.ajouter')}} " class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
             class="fas fa-plus fa-sm text-white-50"></i> Ajouter publication</a>
 </div>
 <div class="row">
@@ -103,6 +103,12 @@
         </div>
     </div>
     {%endfor%}
+    {%else%}
+    <p class="text-center" style="margin-top:100px">
+        <i class="fa fa-user success fa-5x text-center"></i>
+        <h4 class="text-center">AUCUNE PUBLICATION .</h4>
+        <br><br><br>
+      </p>
     {%endif%}
 </div>
 {% endblock body %}
