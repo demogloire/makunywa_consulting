@@ -5,7 +5,7 @@ from datetime import datetime
 
 #Titre
 def title_page(nom="Dashbord"):
-    title=f'{nom} | Makunywa Consulting'
+    title=f'{nom} | ASDI'
     return title
 
 #Historique

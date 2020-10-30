@@ -81,5 +81,8 @@ def create_app(config_name):
     
     from .publication import publication as publication_blueprint
     app.register_blueprint(publication_blueprint)
+
+    from .asdi import asdi as asdi_blueprint
+    app.register_blueprint(asdi_blueprint)
     
     return app
