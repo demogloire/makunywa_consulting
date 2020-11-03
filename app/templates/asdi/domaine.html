@@ -1,0 +1,57 @@
+{% extends "layout/internaute.html" %}
+
+{% block meta %}
+<meta name="robots" content="index">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<link rel="shortcut icon" type="image/x-icon" href="{{url_for('static',filename='logo_t.png')}}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:site_name" content="ASDI-RDC">
+{% endblock meta %}
+
+{% block othercss %}
+
+{%endblock%}
+
+{% block body %}
+{% include 'element/menu.html' %}
+
+
+<!-- ENTETE -->
+<div class="slider-area2">
+    <div class="slider-height2 d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap hero-cap2 pt-70">
+                        <h2>Mission de l'ASDI - RDC.</h2>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{url_for('asdi.accueil')}}">Acceuil</a></li>
+                                <li class="breadcrumb-item"><a href="">Mission.</a></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ENTETE -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock body %}
+
+
+{% block sijax %}{% endblock %}

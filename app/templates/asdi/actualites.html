@@ -1,0 +1,209 @@
+{% extends "layout/internaute.html" %}
+
+{% block meta %}
+<meta name="robots" content="index">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<link rel="shortcut icon" type="image/x-icon" href="{{url_for('static',filename='logo_t.png')}}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:site_name" content="ASDI-RDC">
+{% endblock meta %}
+
+{% block othercss %}
+<link href="{{ url_for('static', filename='card.css')}}" rel="stylesheet">
+{%endblock%}
+
+{% block body %}
+{% include 'element/menu.html' %}
+
+
+<!-- ENTETE -->
+<div class="slider-area2">
+    <div class="slider-height2 d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap hero-cap2 pt-70">
+                        <h2>Actualités</h2>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{url_for('asdi.accueil')}}">Acceuil</a></li>
+                                <li class="breadcrumb-item"><a href="">Actualités</a></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ENTETE -->
+
+
+
+<section class="blog_area section-padding">
+    <div class="container">
+        {%if pub.items|length > 0%}
+        <div class="row">
+            <div class="col-lg-8 mb-5 mb-lg-0">
+                <div class="blog_left_sidebar">
+                    
+                    {%for publication in pub.items%}
+                    {% set date_split = publication.date_pub.strftime('%d-%m-%Y').split('-') %}
+                    <article class="blog_item">
+                        <div class="blog_item_img">
+                            <img class="card-img rounded-0" height="375px" width="750px" src="{{url_for('static', filename='publication/{}'.format(publication.url_img))}}" alt="">
+                            <a href="#" class="blog_item_date">
+                                <h3>{{date_split[0]}}</h3>
+                                <p>{{date_french(date_split[1])}}</p>
+                            </a>
+                        </div>
+                        <div class="blog_details">
+                            <a class="d-inline-block" href="{{url_for('asdi.article', slug=publication.slug)}}">
+                                <h2 class="blog-head" style="color: #2d2d2d;">{{publication.titre}}</h2>
+                            </a>
+                            <ul class="blog-info-link">
+                                <li><a href="#"><i class="far fa-thumbs-up"></i>{{publication.nbr_like}} Like</a></li>
+                                <li><a href="#"><i class="fa fa-eye"></i>{{publication.nbr_lu}} Lu</a></li>
+                                <li><a href="#"><i class="far fa-comments"></i> </i>{{publication.nbr_cmt}} Commentaire</a></li>
+                            
+                            </ul>
+                        </div>
+                    </article>
+                    {%endfor%}
+
+
+                    <nav class="blog-pagination justify-content-center d-flex">
+                        <ul class="pagination">
+                            {%if pub.items|length>3%}
+                            {% for page_num in pub.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                            {% if page_num %}
+                                {% if pub.page==page_num %}
+                                <li class="page-item">
+                                    <a href="{{ url_for('asdi.actualite', page=page_num) }}" class="page-link" aria-label="Next">
+                                        <i class="ti-angle-right"></i>
+                                    </a> 
+                                </li>
+                                {% else %}
+                                <li class="page-item">
+                                    <a href="{{ url_for('asdi.actualite', page=page_num) }}" class="page-link" aria-label="Previous">
+                                        <i class="ti-angle-left"></i>
+                                    </a>
+                                </li>                       
+                                {% endif %}
+                            {% else %}
+                            ...
+                            {% endif %}
+                            {% endfor %}
+                            {%endif%}
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+                    {%if pub_meilleur !=[] %}
+                        <aside class="single_sidebar_widget popular_post_widget">
+                            <h3 class="widget_title" style="color: #2d2d2d;">Meilleur article</h3>
+                            {%for pub_m in pub_meilleur%}
+                            <div class="media post_item">
+                                <img height="90px" width="120px" src="{{url_for('static', filename='publication/{}'.format(pub_m.url_img))}}" alt="post">
+                                <div class="media-body">
+                                    <a href="{{url_for('asdi.article', slug=pub_m.slug)}}">
+                                        <h3 style="color: #2d2d2d;">{{pub_m.titre}}</h3>
+                                    </a>
+                                    {%if pub_m.date_pub==pub_m.date_mod%}
+                                        <p>{{timeagos(pub_m.date_pub)}}</p>
+                                    {%else%}
+                                        <p>{{timeagos(pub_m.date_mod)}}</p>
+                                    {%endif%}
+
+                                    
+                                </div>
+                            </div>
+                            {%endfor%}
+                        </aside>
+                    {%endif%}
+
+
+                    <!-- <aside class="single_sidebar_widget instagram_feeds">
+                        <h4 class="widget_title" style="color: #2d2d2d;">Instagram Feeds</h4>
+                        <ul class="instagram_row flex-wrap">
+                            <li>
+                                <a href="#">
+                                    <img class="img-fluid" src="assets/img/post/post_5.png" alt="">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img class="img-fluid" src="assets/img/post/post_6.png" alt="">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img class="img-fluid" src="assets/img/post/post_7.png" alt="">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img class="img-fluid" src="assets/img/post/post_8.png" alt="">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img class="img-fluid" src="assets/img/post/post_9.png" alt="">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img class="img-fluid" src="assets/img/post/post_10.png" alt="">
+                                </a>
+                            </li>
+                        </ul>
+                    </aside> -->
+                    <aside class="single_sidebar_widget newsletter_widget">
+                        <h4 class="widget_title" style="color: #2d2d2d;">Bulletin d'information</h4>
+                        <form action="#">
+                            <div class="form-group">
+                                <input type="email" class="form-control" onfocus="this.placeholder = ''"
+                                    onblur="this.placeholder = 'Enter email'" placeholder="Enter email" required="">
+                            </div>
+                            <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                type="submit">Abonnez - vous</button>
+                        </form>
+                    </aside>
+                </div>
+            </div>
+        </div>
+        {%else%}
+        <div class="row justify-content-center">
+            <div class="col-md-12" style="margin-top: 50px;margin-bottom: 50px;">
+                <h1 class="text-center" style="font-weight: 900 bold;font-size:70px; text-shadow: -1px -1px white, 1px 1px #333; color:#AC9757; font-family: Trattatello, fantasy;">Aucun article publié.</h1>
+            </div>
+        </div>
+        {%endif%}
+    </div>
+</section>
+
+{% endblock body %}
+
+{% block sijax %}
+<script type="text/javascript" src="/static/js/sijax/sijax.js"></script>
+<script type="text/javascript">
+    {{ g.sijax.get_js()|safe }}
+</script>
+
+<script>
+    $(document).ready(function(){
+    $(document).on('click', '#submit', function(){
+
+        Sijax.request('commentaire', [Sijax.getFormValues('#commentaire')]);
+        $('#commentaire')[0].reset();
+
+        return false;
+
+    });
+
+});
+</script>
+{% endblock %}

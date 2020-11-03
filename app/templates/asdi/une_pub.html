@@ -1,0 +1,216 @@
+{% extends "layout/internaute.html" %}
+
+{% block meta %}
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<link rel="shortcut icon" type="image/x-icon" href="{{url_for('static',filename='logo_t.png')}}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta property="og:title" content="{{une_pub.titre}}">
+<meta property="og:image" content="{{url_for('static', filename='publication/{}'.format(une_pub.url_img), _external=True)}}">
+<meta property="og:url" content="{{url_for('asdi.article', slug=une_pub.slug , _external=True)}}">
+
+<meta name="twitter:title" content="{{une_pub.titre}}">
+<meta name="twitter:image" content="{{url_for('static', filename='publication/{}'.format(une_pub.url_img), _external=True)}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="{{url_for('asdi.article', slug=une_pub.slug , _external=True)}}">
+<meta charset="utf-8">
+
+
+
+
+
+{% endblock meta %}
+
+{% block othercss %}
+<link href="{{ url_for('static', filename='card.css')}}" rel="stylesheet">
+{%endblock%}
+
+{% block body %}
+{% include 'element/menu.html' %}
+
+
+<!-- ENTETE -->
+<div class="slider-area2">
+    <div class="slider-height2 d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap hero-cap2 pt-70">
+                        <h2>Actualités</h2>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{url_for('asdi.accueil')}}">Acceuil</a></li>
+                                <li class="breadcrumb-item"><a href="#">{{une_pub.titre}}</a></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ENTETE -->
+
+
+
+<!-- ARTICLE  -->
+<section class="blog_area single-post-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 posts-list">
+                <div class="single-post">
+                    <div class="feature-img">
+                        <img  height="375" width="750" class="img-fluid" src="{{url_for('static', filename='publication/{}'.format(une_pub.url_img))}}" alt="">
+                    </div>
+                    <div class="blog_details">
+                        <h2 style="color: #2d2d2d; font-size: 30px;">{{une_pub.titre}}
+
+                        </h2>
+                        <span id="page_stat">
+                            {% include 'sijax/page_stat.html' %}
+                        </span>
+
+                        <p class="excert" style="color: black;">
+                           {{une_pub.resume|safe}}
+                        </p>
+
+                        {%for document in une_pub.fichiers%}
+                        {%if document.url_pdf != None%}
+                        <div>
+                            <a target="_blank" href="{{url_for('static', filename='publication/{}'.format(document.url_pdf))}} " class="btn btn-sm"><span style="color:white"> Télécharger PDF</span></a>
+                        </div>
+                        {%endif%}
+                        {%endfor%}
+                        <br>
+                    </div>
+                </div>
+                <div class="navigation-top">
+                    <div class="d-sm-flex justify-content-between text-center">
+                        <a href="javascript://" onclick="Sijax.request('like_page',[{{une_pub.id}}]);" class="btn btn-sm"><span style="color:white"> Like</span></a>
+
+                        <div class="col-sm-4 text-center my-2 my-sm-0">
+                            
+                        </div>
+                        <ul class="social-icons">
+                            <li><a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
+                            <li><a href="#"><i class="fab fa-behance"></i></a></li>
+                        </ul>
+                    </div>
+
+                </div>
+                <span id="com">
+                    {% include 'sijax/form.html' %}
+                </span>
+                <span id="commet">
+                    {% include 'sijax/commentaire.html' %}
+                </span>
+                
+            </div>
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+                    {%if pub_meilleur !=[] %}
+                    <aside class="single_sidebar_widget popular_post_widget">
+                        <h3 class="widget_title" style="color: #2d2d2d;">Recent article</h3>
+                        {%for pub_m in pub_meilleur%}
+                        <div class="media post_item">
+                            <img height="90px" width="120px" src="{{url_for('static', filename='publication/{}'.format(pub_m.url_img))}}" alt="post">
+                            <div class="media-body">
+                                <a href="{{url_for('asdi.article', slug=pub_m.slug)}}">
+                                    <h3 style="color: #2d2d2d;">{{pub_m.titre}}</h3>
+                                </a>
+                                {%if pub_m.date_pub==pub_m.date_mod%}
+                                    <p>{{timeagos(pub_m.date_pub)}}</p>
+                                {%else%}
+                                    <p>{{timeagos(pub_m.date_mod)}}</p>
+                                {%endif%}
+
+                                
+                            </div>
+                        </div>
+                        {%endfor%}
+                    </aside>
+                    {%endif%}
+
+                    <aside class="single_sidebar_widget newsletter_widget">
+                        <h4 class="widget_title" style="color: #2d2d2d;">Bulletin d'information</h4>
+                        <form action="#">
+                            <div class="form-group">
+                                <input type="email" class="form-control" onfocus="this.placeholder = ''"
+                                    onblur="this.placeholder = 'Enter email'" placeholder="Enter email" required="">
+                            </div>
+                            <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                type="submit">Abonnez - vous</button>
+                        </form>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ARTICLE  -->
+{%for comment in commentaire_pub%}  
+    <div class="modal fade" id="myModal{{comment.id}}">
+            <div class="modal-dialog">
+              <div class="modal-content">    
+                <div class="modal-header">
+                    <h2><b>Réponse au commentaire</b> </h2>
+                </div>  
+                
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form class="form-contact comment_form" action="{{url_for('asdi.commentaire_secondaire',id_pub=comment.publication_id,id=comment.id)}}  "  method="post">
+                        {{ comm.csrf_token }}
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    {% if comm.commmentaire.errors %}
+                                    {{ comm.commmentaire(class="form-control w-100 is-invalid", id="commentaire", cols="15", rows="4")}}
+                                    <div class="invalid-feedback">
+                                        <span id="erreur"></span>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        {% for error in comm.commmentaire.errors %}
+                                        <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                    {% else %}
+                                    {{ comm.commmentaire(class="form-control w-100", id="commentaire", cols="15", rows="4")}} 
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="form-group text-center">
+                            <input class="btn btn-danger" id="commenter" name="commenter" type="submit" value="Reponse">
+                       </div>
+                    </form>
+                </div>
+              </div>
+            </div>
+    </div>
+{%endfor%}
+
+{% endblock body %}
+
+{% block sijax %}
+<script type="text/javascript" src="/static/js/sijax/sijax.js"></script>
+<script type="text/javascript">
+    {{ g.sijax.get_js()|safe }}
+</script>
+
+<script>
+    $(document).ready(function(){
+    $(document).on('click', '#submit', function(){
+
+        Sijax.request('commentaire', [Sijax.getFormValues('#commentaire')]);
+        $('#commentaire')[0].reset();
+
+        return false;
+
+    });
+
+});
+</script>
+{% endblock %}

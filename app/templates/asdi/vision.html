@@ -1,0 +1,346 @@
+{% extends "layout/internaute.html" %}
+
+{% block meta %}
+<meta name="robots" content="index">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<link rel="shortcut icon" type="image/x-icon" href="{{url_for('static',filename='logo_t.png')}}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:site_name" content="ASDI-RDC">
+{% endblock meta %}
+
+{% block othercss %}
+<style>
+    /* vision  */
+    #cover {
+        background: #222 url('http://www.goodwp.com/images/201402/goodwp.com_30727.jpg') center center no-repeat;
+        background-size: cover;
+        color: white;
+        height: 100%;
+        text-align: center;
+        display: flex;
+        align-items: center;
+    }
+
+    #cover-caption {
+        margin: auto;
+
+
+    }
+
+    #container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .section-content {
+        padding: 5rem 0;
+    }
+
+    .section-content h3 {
+        margin-left: 20px;
+    }
+
+    .lead {
+        margin-left: 20px;
+    }
+
+
+    .btn-secondary:hover {
+        color: #ccc;
+        background-color: transparent;
+        border-color: #adadad;
+    }
+
+    .img-fluid {
+        height: 960px;
+    }
+
+    .form-inline {
+        margin-left: 18%;
+
+    }
+
+    .card-img-top {
+        height: 300px;
+    }
+
+    #about {
+        background: url("../../static/u.png") center center no-repeat;
+        background-size: cover;
+    }
+
+    .about-text {
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 1.875rem;
+    }
+
+    .btn-secondary {
+        color: white;
+        margin: 10px;
+    }
+
+    h5 {
+        margin-left: 15px;
+    }
+
+    #news h3 {
+        margin-left: 20px;
+        margin-top: 10px;
+    }
+
+    #footer-main {
+        background: #222;
+        color: white;
+        font-size: 0.8rem;
+        padding: 2.5rem 0;
+
+    }
+
+    .list-group-item {
+        background: #232323;
+        border-color: #232323;
+    }
+
+    #footer-main a {
+        color: #a3a3c2;
+    }
+
+    #services_2 {
+        background-color: rgb(255, 255, 255);
+        padding: 40px;
+    }
+
+    .indent_1000 {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .testimonial-thumb img {
+        max-width: 680px;
+    }
+
+    .testimonial-thumb img {
+        border-radius: 410px;
+        border: 5px solid #fff;
+    }
+
+    .testimonial-title {
+        font-weight: bold;
+        font-size: 24px;
+        font-size: 2.4rem;
+        /*   margin: 1rem 0; */
+
+    }
+
+    @media screen and (max-width: 1099px) {
+        .indent_1000 {
+            margin: 0;
+            padding: 0 4rem;
+        }
+    }
+
+    @media screen and (max-width: 320px) {
+        .indent_1000 {
+            margin: 0 2rem;
+        }
+    }
+
+    /* fin vision */
+
+  
+
+
+</style>
+{%endblock%}
+
+{% block body %}
+{% include 'element/menu.html' %}
+
+
+<!-- ENTETE -->
+<div class="slider-area2">
+    <div class="slider-height2 d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap hero-cap2 pt-70">
+                        <h2>Vision de l'ASDI - RDC.</h2>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{url_for('asdi.accueil')}}">Acceuil</a></li>
+                                <li class="breadcrumb-item"><a href="">Vision.</a></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ENTETE -->
+<!--? Services Area Start -->
+<!-- Services Area End -->
+<section id="services_2">
+    <div class="indent_1000">
+        <ul class="services_2">
+            <div class="row">
+                <li class="test col-sm-4 text-center">
+                    <figure class="testimonial-thumb">
+                        <img class="img-responsive center-block" height="253px" width="253px"
+                            src="{{ url_for('static', filename='inte/assets/img/gallery/wash.jpg')}}" alt>
+                    </figure>
+                    <aside class="testimonial-text">
+                        <h3 class="testimonial-title text-center">Wash</h3>
+                    </aside>
+                </li>
+                <li class="test col-xs-12 col-sm-4 text-center">
+                    <figure class=" testimonial-thumb">
+                        <img class="img-responsive center-block" height="253px" width="253px"
+                            src="{{ url_for('static', filename='inte/assets/img/gallery/ref.jpg')}}" alt>
+                    </figure>
+                    <aside class="testimonial-text">
+                        <h3 class="testimonial-title text-center">Situation humanitaire</h3>
+
+                    </aside>
+                </li>
+                <li class="test col-xs-12 col-sm-4 text-center">
+                    <figure class="testimonial-thumb">
+                        <img class="img-responsive center-block" height="253px" width="253px"
+                            src="{{ url_for('static', filename='inte/assets/img/gallery/env.jpg')}}" alt>
+                    </figure>
+                    <aside class="testimonial-text">
+                        <h3 class="testimonial-title text-center">Environnement</h3>
+
+                    </aside>
+                </li>
+            </div>
+        </ul>
+    </div>
+</section>
+<section id="about" class="service-area section-padding30">
+    <div class="section-content" >
+        <div class="container">
+            <div class="col-md-6">
+                <div class="about-text">
+                    <h1 style="font-size: 70px; color: #AC9757; text-shadow: -1px -1px white, 1px 1px #333; ">Vision</h1>
+                    <p class="text-justify" style="color: #AC9757; font-family: Arial, Helvetica, sans-serif; font-size: 25px;">La RDC est en
+                        proie à des conflits chroniques, principalement causés par la diversité et la richesse des
+                        ressources de certaines régions. Entre conflit, pauvreté persistante, malnutrition et épidémie
+                        d’Ebola et de choléra, 13 million des personnes ont besoin d’aide humanitaire. </p>
+                    <p class="text-justify" style="color: #AC9757; font-family: Arial, Helvetica, sans-serif; font-size: 25px;">C'est pourqoui
+                        l’ONG ASDI-RDC poursuit la vision de promouvoir un développement durable dans le milieu rural,
+                        périurbain et urbain en vue d’améliorer les conditions de vie des populations dans la région des
+                        Grands Lacs.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br><br>
+<!--? About Area Start -->
+<section class="support-company-area fix pt-10">
+    <div class="container">
+    <div class="support-wrapper align-items-center">
+        <div class="right-content">
+            <!-- img -->
+            <div class="right-img">
+                <img class="box-shadow--6dp" src="{{ url_for('static', filename='inte/assets/img/gallery/donne.jpeg')}}" alt="">
+            </div>
+
+        </div>
+        <div class="left-content">
+            <!-- section tittle -->
+            <div class="section-tittle section-tittle2 mb-30">
+                <h2 style="color:black; font-weight: bold;">Nous donnons l'éspoir. </h2>
+            </div>
+            <div class="support-caption">
+                <p class="pera-top text-justify" style="font-size: 25px;">Dans un monde contraint par des inégalités croissantes et
+                    des aléas climatiques en recrudescence, les crises humanitaires sont à la fois
+                    plus nombreuses, plus intenses et plus durables. Hier la crise de Ebola au Nord Kivu,
+                    Sud Kivu et Ituri, aujourd’hui les crises humanitaires dues au mouvement des populations
+                    et le COVID 19. De ce fait, ASDI-RDC déploie ses équipes pour être présentes dès les
+                    premiers temps.</p>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+</section>
+<!-- About Area End -->
+
+<!-- end work experience -->
+<div class="container" style="margin-bottom: 50px; margin-top: 70px;">
+    <h2 style="color: black; text-align:center;border-bottom:solid 1px #eee; font-size: 20px; font-size: 30px; font-weight: bold;">
+        Nos Partenaires</h2>
+    
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div id="Carousel" class="carousel slide">
+                <!-- Carousel items -->
+                <div class="carousel-inner">
+
+                    <div class="item active">
+                        <div class="row text-center" style="margin-top:10px;">
+                            <div class="col-md-2 col-xs-4 text-center"><a href="https://www.unocha.org/drc" class="thumbnail"><img
+                                        src="{{url_for('static', filename='logo/ocha.png')}}" alt="Image"
+                                        style="height:80px; width: 170px;"></a></div>
+                            <div class="col-md-2 col-xs-4 text-center"><a href="https://www.unicef.org/drcongo/"
+                                    class="thumbnail"><img src="{{url_for('static', filename='logo/unice.png')}}"
+                                        alt="Image" style="height:75px; width: 180px;"></a></div>
+                            <div class="col-md-2 col-xs-4"><a href="https://www.sante.gouv.cd/" class="thumbnail"><img
+                                        src="{{url_for('static', filename='logo/sante.png')}}" alt="Image"
+                                        style="height:70px; width: 170px;"></a></div>
+                            <div class="col-md-2 col-xs-4 text-center"><a href="www.ned.org"
+                                    class="thumbnail"><img src="{{url_for('static', filename='logo/ned.png')}}"
+                                        alt="Image" style="height:60px; width: 170px;"></a></div>
+
+                            <div class="col-md-2 col-xs-4 text-center"><a href="https://www.rescue.org/country/democratic-republic-congo"
+                                    class="thumbnail"><img src="{{url_for('static', filename='logo/don.jpg')}}"
+                                        alt="Image" style="height:70px; width: 70px;"></a></div>
+                            <div class="col-md-2 col-xs-4 text-center"><a href="https://drc.unfpa.org/fr"
+                                    class="thumbnail"><img src="{{url_for('static', filename='logo/unfpa.png')}}"
+                                        alt="Image" style="height:40px; width: 150px;"></a></div>
+                        </div>
+                        <!--.row-->
+                    </div>
+                    <!--.item-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock body %}
+
+{% block sijax %}
+
+<script>
+
+
+
+
+    $(document).ready(function () {
+        $('#Carousel').carousel({
+            interval: 3000
+        })
+    });
+</script>
+
+{% endblock %}

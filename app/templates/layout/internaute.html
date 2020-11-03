@@ -2,16 +2,15 @@
 <html class="no-js" lang="zxx">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    {% block meta %}{% endblock meta %}
     {% if title %}
     <title> {{ title }} </title>
     {% else %}
     <title> ASDI </title>
     {% endif %}
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    
+    
 
     <!-- CSS here -->
     <link rel="stylesheet" href="{{ url_for('static', filename='inte/assets/css/bootstrap.min.css')}}">
@@ -29,7 +28,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='inte/assets/css/nice-select.css')}}">
     <link rel="stylesheet" href="{{ url_for('static', filename='inte/assets/css/style.css')}}">
     <link href="{{ url_for('static', filename='style.css')}}" rel="stylesheet">
-    <style></style>
     {% block othercss %}{%endblock%}
 
 </head>
@@ -46,314 +44,8 @@
             </div>
         </div>
     </div>
-    <!-- Preloader Start -->
-    <header>
-        <!-- Header Start -->
-        <div class="header-area">
-            <div class="main-header ">
-                <div class="header-bottom  header-sticky">
-                    <div class="container-fluid">
-                        <div class="row align-items-center">
-                            <!-- Logo -->
-                            <div class="col-xl-2 col-lg-2">
-                                <div class="logo">
-                                    <a href="index.html"><img
-                                            src="{{ url_for('static', filename='inte/assets/img/logo/logo.png')}}"
-                                            alt=""></a>
-                                </div>
-                            </div>
-                            <div class="col-xl-10 col-lg-10">
-                                <div class="menu-wrapper  d-flex align-items-center justify-content-end">
-                                    <!-- Main-menu -->
-                                    <div class="main-menu d-none d-lg-block">
-                                        <nav>
-                                            <ul id="navigation">
-                                                <li><a href="{{url_for('asdi.accueil')}}">Acceuil</a></li>
-                                                <li><a href="#">Qui sommes-nous?</a>
-                                                    <ul class="submenu">
-                                                        <li><a href="blog.html">Vision</a></li>
-                                                        <li><a href="blog_details.html">Mission</a></li>
-                                                        <li><a href="elements.html">Historique</a></li>
-                                                    </ul>
-                                                </li>
-                                                
-                                                <li><a href="about.html">Réalisation</a></li>
-                                                <li><a href="what-do.html">Galerie</a></li>
-                                                <li><a href="projects.html">Actus</a></li>
-                                                <li><a href="contact.html">Contact</a></li>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                    <!-- Header-btn -->
-                                    <div class="header-right-btn d-none d-lg-block ml-20">
-                                        <a href="contact.html" class="btn header-btn">Faire un don</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Mobile Menu -->
-                            <div class="col-12">
-                                <div class="mobile_menu d-block d-lg-none"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Header End -->
-    </header>
     <main>
-
-        <!-- slider Area Start-->
-        <div class="slider-area position-relative">
-            <div class="slider-active dot-style">
-                <!-- Single Slider -->
-                <div class="single-slider hero-overly slider-height slider-bg1 d-flex align-items-center">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-10">
-                                <div class="hero__caption">
-                                    <h1 data-animation="fadeInUp" data-delay=".2s">Ensemble</h1>
-                                    <P data-animation="fadeInUp" data-delay=".4s">Changons les conditions <br> de la vie
-                                        humaines.</P>
-                                    <!-- Hero-btn -->
-                                    <div class="hero__btn">
-                                        <a href="industries.html" class="hero-btn mb-10" data-animation="fadeInUp"
-                                            data-delay=".8s">Join Us Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Slider -->
-                <div class="single-slider hero-overly slider-height slider-bg1 d-flex align-items-center">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-10">
-                                <div class="hero__caption">
-                                    <h1 data-animation="fadeInUp" data-delay=".2s">Environment</h1>
-                                    <P data-animation="fadeInUp" data-delay=".4s">Provide us a green and healthy
-                                        life<br> we need to protect </P>
-                                    <!-- Hero-btn -->
-                                    <div class="hero__btn">
-                                        <a href="industries.html" class="hero-btn mb-10" data-animation="fadeInUp"
-                                            data-delay=".8s">Join Us Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Slider -->
-                <div class="single-slider hero-overly slider-height slider-bg1 d-flex align-items-center">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-10">
-                                <div class="hero__caption">
-                                    <h1 data-animation="fadeInUp" data-delay=".2s">Environment</h1>
-                                    <P data-animation="fadeInUp" data-delay=".4s">Provide us a green and healthy
-                                        life<br> we need to protect </P>
-                                    <!-- Hero-btn -->
-                                    <div class="hero__btn">
-                                        <a href="industries.html" class="hero-btn mb-10" data-animation="fadeInUp"
-                                            data-delay=".8s">Join Us Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- slider Area End-->
-        <div class="service-area" style="background-color:#f8f9fa;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12" style="margin-top: 50px;margin-bottom: 50px;">
-                        <h1 class="text-center" style="font-weight: 900 bold;font-size:70px; text-shadow: -1px -1px white, 1px 1px #333; color:#AC9757; font-family: Trattatello, fantasy;">AGIR AVEC ASDI</h1>
-                    </div>
-                </div>
-                <div class="row">
-                        <div class="col-md-4" style="margin-bottom:50px">
-                            <div class="single-defination">
-                                <div style="font-size: 24px;" class="text-center">
-                                    <span class="text-info">
-                                    <i  class="fas fa-male fa-male fa-5x"></i>
-                                </span>
-                                </div> 
-                                <br>
-                                <h2 style="font-weight:bold; font-size:40px; font-family: Chalkduster, sans-serif;" class="mb-20 text-center text-info">ASSISTER</h2>
-                                
-                                <p style="font-family: Arial, Helvetica, sans-serif; font-size: 20px;" class="text-center">Changez la vie en assistant des personnes en situation difficile, agissez avec <b>ASDI</b>.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4" style="margin-bottom:50px">
-                            <div class="single-defination">
-                                <div style="font-size: 24px;" class="text-center">
-                                    <span class="text-warning">
-                                    <i  class="fas fa-university fa-5x"></i>
-                                </span>
-                                </div> 
-                                <br>
-                                <h2 style="font-weight:bold; font-size:40px; font-family: Chalkduster, sans-serif;" class="mb-20 text-center text-warning">ÉDUQUER</h2>
-                                
-                                <p style="font-family: Arial, Helvetica, sans-serif; font-size: 20px;" class="text-center">Protegez l'environnement en éduquant sur la lutter contre les catastrophes naturelles, agissez maintenant avec <b>ASDI</b>.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4" style="margin-bottom:50px">
-                            <div class="single-defination">
-                                <div style="font-size: 24px;" class="text-center">
-                                    <span class="text-danger">
-                                    <i  class="fas fa-bullhorn fa-5x"></i>
-                                </span>
-                                </div> 
-                                <br>
-                                <h2 style="font-weight:bold; font-size:40px; font-family:Chalkduster, sans-serif;" class="mb-20 text-center text-danger">MOBILISER</h2>
-                                
-                                <p style="font-family: Arial, Helvetica, sans-serif; font-size: 20px;" class="text-center">Participez à la mobilisation de la population pour eviter les maladies hydriques et les virus du 21 ieme siecle à côte de l'<b>ASDI</b>.</p>
-                            </div>
-                        </div>
-
-
-                </div>
-                
-            </div>
-        </div>
-        <!--? Visit Our Tailor Start -->
-        <div class="visit-tailor-area fix">
-            <!--Right Contents  -->
-            <div class="tailor-offers"></div>
-            <!-- left Contents -->
-            <div class="tailor-details">
-                <h2 style="color:black; font-weight: bold;">Pour une vie humaine paissible.</h2>
-                <p>ASDI-RDC poursuit la mission de renforcer la résilience des populations affectées 
-                    par des conflits, des catastrophes naturelles, des épidémies, l’insécurité alimentaire, 
-                    la pauvreté chronique et les déficiences structurelles et de protection. </p>
-                <p class="pera-bottom">Les équipes ASDI-RDC se mobilisent dans des situations d’urgence 
-                    auprès des populations les plus vulnérables et des populations déplacées, ainsi que 
-                    sur des activités sur le long terme telles que des travaux de réhabilitation, des 
-                    projets de relance agricole ou encore la mise en place d’un système très efficace de 
-                    partager à la communauté humanitaire les alertes au travers les évaluations 
-                    multisectorielles soutenue par une expertise scientifique.</p>
-                <div class="footer-tittles">
-                    <p>ASDI RDC / ONG</p>
-                </div>
-            </div>
-        </div>
-        <!-- Visit Our Tailor End -->
-        <!--? Services Area Start -->
-        <div class="service-area section-padding30">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-11">
-                        <div class="single-cat text-center mb-30">
-                            <div class="cat-icon box-shadow--6dp">
-                                <img src="{{ url_for('static', filename='inte/assets/img/gallery/wash.jpg')}}"
-                                    alt="">
-                            </div>
-                            <div class="cat-cap">
-                                <h5><a href="#">Wash</a></h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-11">
-                        <div class="single-cat active text-center mb-30">
-                            <div class="cat-icon box-shadow--6dp">
-                                <img src="{{ url_for('static', filename='inte/assets/img/gallery/ref.jpg')}}"
-                                    alt="">
-                            </div>
-                            <div class="cat-cap">
-                                <h5><a href="#">Situation humanitaire</a></h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-11">
-                        <div class="single-cat text-center mb-30">
-                            <div class="cat-icon box-shadow--6dp">
-                                <img src="{{ url_for('static', filename='inte/assets/img/gallery/env.jpg')}}"
-                                    alt="">
-                            </div>
-                            <div class="cat-cap">
-                                <h5><a href="#">Environnement</a></h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Services Area End -->
-        <!--? About Area Start -->
-        <section class="support-company-area fix pt-10">
-            <div class="support-wrapper align-items-center">
-                <div class="left-content">
-                    <!-- section tittle -->
-                    <div class="section-tittle section-tittle2 mb-30">
-                        <h2 style="color:#AC9757; font-weight: bold;">Ensemble nous pouvons.</h2>
-                    </div>
-                    <div class="support-caption">
-                        <p class="pera-top">Promouvoir un développement durable dans le milieu 
-                            rural, périurbain et urbain en vue d’améliorer les conditions de vie 
-                            des populations dans la région des Grands Lacs.</p>
-                        <a href="#" class="border-btn">Join Us Now</a>
-                    </div>
-                </div>
-                <div class="right-content">
-                    <!-- img -->
-                    <div class="right-img">
-                        <img src="{{ url_for('static', filename='inte/assets/img/gallery/enfant.jpg')}}" alt="">
-                    </div>
-
-                </div>
-            </div>
-        </section>
-        <!-- About Area End -->
-
-        <!--? Blog Area Start -->
-        <section class="home-blog-area pb-padding section-padding30">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-xl-10 col-lg-10 ">
-                        <!-- Section Tittle -->
-                        <div class="section-tittle text-center mb-80">
-                            <h2 style="color:#AC9757; font-weight: bold;">Nos dernières publications</h2>
-                            <p style="font-size: 20px;">Suivez les actualités de l'<b>A</b>ction de <b>S</b>olidarité pour le <b>D</b>éveloppement <b>I</b>ntegré.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card card-blog">
-                            <div class="card-image">
-                                <a href="#"> <img class="img" src="http://adamthemes.com/demo/code/cards/images/blog01.jpeg"> </a>
-                                <div class="ripple-cont"></div>
-                            </div>
-                            <div class="table">
-                                <h6 class="category text-warning">
-                                            <i class="fa fa-soundcloud"></i> Music
-                                        </h6>
-                                <h4 class="card-caption">
-                                <a href="#">Vivamus odio ante, feugiat eget nisi sit amet, dignissim velit</a>
-                            </h4>
-                                <div class="ftr">
-                                    <div class="author">
-                                        <a href="#"> <img src="http://adamthemes.com/demo/code/cards/images/avatar3.png" alt="..." class="avatar img-raised"> <span>Debbon Amet</span> </a>
-                                    </div>
-                                    <div class="stats"> <i class="fa fa-clock-o"></i> 15 min </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="margin-top: 20px;">
-                    <div class="col-md-12 text-center" >
-                        <a href="#" class="border-btn">Plus d'actualités</a>
-                    </div>
-                    
-                </div>
-            </div>
-        </section>
-        <!-- Blog Area End -->
-
+    {% block body %}{% endblock body %}
     </main>
     <footer>
         <div class="footer-wrapper">
@@ -413,12 +105,13 @@
                         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-4">
                             <div class="single-footer-caption mb-50">
                                 <div class="footer-tittle">
-                                    <h4>Contact us</h4>
+                                    <h4>Contact</h4>
                                     <ul>
-                                        <li><a href="#">consulto98@gmail.com</a></li>
-                                        <li><a href="#">76/A, Green road, NYC</a></li>
-                                        <li><a href="#">Privacy Policy</a></li>
-                                        <li class="number"><a href="#">(80) 783 367-3904</a></li>
+                                        <li><a href="#">secretariatgeneral@asdi-rdc.org</a></li>
+                                        <li><a href="#">Commune MULEKERA, Quartier BUTSILI, Avenue KALONDA no 06., Ville de BENI,</a></li>
+                                        
+                                        <li class="number"><a href="#">(243) 820 646 666 (243) 997 298 923</a></li>
+                                        
                                     </ul>
                                 </div>
                             </div>
@@ -497,6 +190,7 @@
     <!-- Jquery Plugins, main Jquery -->
     <script src="{{ url_for('static', filename='inte/assets/js/plugins.js')}}"></script>
     <script src="{{ url_for('static', filename='inte/assets/js/main.js')}}"></script>
+    {% block sijax %}{% endblock sijax %}
 
 </body>
 

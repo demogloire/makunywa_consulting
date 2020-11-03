@@ -34,6 +34,7 @@ class Publication(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) 
     fichiers = db.relationship('Fichier', backref='pub_fic', lazy='dynamic')
     commentaires = db.relationship('Commentaire', backref='pub_com', lazy='dynamic')
+    likes = db.relationship('Like', backref='like_pub', lazy='dynamic')
     def __repr__(self):
         return ' {} '.format(self.titre)
 
@@ -104,6 +105,15 @@ class Internaute(db.Model):
     def __repr__(self):
         return ' {} '.format(self.nombre_v_par)
 
+class Like(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    id_publication=db.Column(db.Integer, db.ForeignKey('publication.id'), nullable=False) 
+    visteur_id = db.Column(db.Integer, db.ForeignKey('visiteur.id'), nullable=False) 
+    def __repr__(self):
+        return ' {} '.format(self.nombre_v_par)
+
+
+
 class Visiteur(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     pseudonyme = db.Column(db.String(128))
@@ -111,6 +121,9 @@ class Visiteur(db.Model):
     date_mod=db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     avatar=db.Column(db.String(128))
     resultats = db.relationship('Resultat', backref='user_pub', lazy='dynamic')
+    likes = db.relationship('Like', backref='like_vis', lazy='dynamic')
+    commentaires = db.relationship('Commentaire', backref='vis_com', lazy='dynamic')
+    comments = db.relationship('Comment', backref='vis_comment', lazy='dynamic')
     def __repr__(self):
         return ' {} '.format(self.pseudonyme)
 
@@ -123,6 +136,8 @@ class Commentaire(db.Model):
     id_primaire = db.Column(db.Integer) 
     date_mod=db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     publication_id = db.Column(db.Integer, db.ForeignKey('publication.id'), nullable=False) 
+    vist_id = db.Column(db.Integer, db.ForeignKey('visiteur.id'), nullable=False) 
+    comments = db.relationship('Comment', backref='comment_com', lazy='dynamic')
     def __repr__(self):
         return ' {} '.format(self.commentaire)
 
@@ -134,6 +149,16 @@ class Historique(db.Model):
     def __repr__(self):
         return ' {} '.format(self.message)
 
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    commentaire = db.Column(db.Text)
+    statut = db.Column(db.Boolean, default=False) 
+    date_mod=db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    visiteur_id = db.Column(db.Integer, db.ForeignKey('visiteur.id'), nullable=False) 
+    commentaire_id = db.Column(db.Integer, db.ForeignKey('commentaire.id'), nullable=False) 
+    def __repr__(self):
+        return ' {} '.format(self.commentaire)
 
 
 
