@@ -1,0 +1,84 @@
+{% extends "layout/admin.html" %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-md-12 mt-5"> 
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card card-outline-secondary box-shadow--3dp">
+                <div class="card-body">
+                    <h3><b>Image de l'album ({{ nom_album}})</b></h3> <br>
+                    {% with messages= get_flashed_messages(with_categories=true) %}
+              {% if messages  %}
+              {% for category, message in messages %}
+              {%if category!="danger"%}
+                  <div class="alert round bg-{{ category }} alert-icon-left alert-dismissible mb-2" role="alert">
+                      <span class="alert-icon">
+                          <i class="fa fa-thumbs-o-up"></i>
+                      </span>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                      <strong>{{ message }}!</strong> 
+                      
+                  </div>
+              {%else%}
+                  <div class="alert round bg-{{ category }} alert-icon-left alert-dismissible mb-2" role="alert">
+                      <span class="alert-icon">
+                          <i class="fa fa-thumbs-o-down"></i>
+                      </span>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                      <strong>{{ message }}!</strong>
+                      
+                  </div>
+              {%endif%}
+              
+              {% endfor %}
+              {% endif %}
+              {% endwith %}
+              <form method="POST" enctype="multipart/form-data" >
+                {{ form.csrf_token }}
+ 
+                <div class="row">
+                    <div class="col-md-6">
+                            <div class="form-group">
+                                    <label> <small>* Les photos de l'albums</small> </label>
+                                    {% if form.file.errors %}
+                                    {{ form.file(class="file-control is-invalid")}}
+                                    <i class="form-group__bar"></i>
+                                    <div class="invalid-feedback">
+                                        {% for error in form.file.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                    {% else %}
+                                    {{ form.file(class="file-control ")}}
+                                    <i class="form-group__bar"></i>
+                                    {% endif %}
+                            </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pull-right">
+                            <button class="btn btn-outline-info btn-md" id="submit" name="submit" type="submit">
+                                    <i class="ti-cloud"></i> Upload
+                            </button>
+                            <a class="btn btn-outline-info btn-md" href=" {{url_for('album.terminerupload')}} "> <i class="fa fa-times" ></i> Terminer</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+            </form>
+                </div><!--/card-block-->
+            </div><!-- /form card login -->
+        </div>
+      </div>
+    </div><!--/col-->
+</div><!--/row-->
+
+
+
+{% endblock body %}

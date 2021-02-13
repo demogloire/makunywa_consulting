@@ -1,6 +1,6 @@
 from flask import render_template, flash, url_for, redirect, request, session, g
 from .. import db, bcrypt
-from ..models import User, Publication, Categorie, Like, Historique, Commentaire, Comment
+from ..models import User, Publication, Categorie, Like, Historique, Commentaire, Comment, Photo, Album, Fichier
 from flask_login import login_user, current_user, logout_user, login_required
 from datetime import datetime, date
 import flask_sijax
@@ -64,89 +64,35 @@ def accueil():
     mac_utilisateur=user_mac()
     #Liste des actualités sur la plateforme
     pub=Publication.query.filter(Publication.statut==True, Categorie.nom=='Actualités').order_by(Publication.id.asc()).limit(6).all()
-    return render_template('asdi/index.html',title=title, pub=pub)
+    photo=Photo.query.filter(Album.statut==True).order_by(Photo.id.asc()).limit(10).all() #Les photos
+    
+    return render_template('asdi/index.html',title=title, pub=pub, photos=photo)
 
 
 """ Article """
-@flask_sijax.route(asdi, '/article/<string:slug>')
+@asdi.route('/article/<string:slug>')
 def article(slug):
-    def like_page(obj_response, arg1):
-        title=title_page("Actualité")
-        #Enregistrement de luke
-        pub_art=Publication.query.filter_by(id=arg1).first_or_404()
-        # L'utilisateur en cours
-        mac_utilisateur=user_mac()
-        #Like article
-        like=Like.query.filter_by(visteur_id=mac_utilisateur, id_publication=arg1).first()
-        if like is None:
-            pub_art.nbr_like=pub_art.nbr_like+1
-            like_une=Like(id_publication=arg1, visteur_id=mac_utilisateur)
-            db.session.add(like_une)
-            db.session.commit()
-        else:
-            pub_art.nbr_like=pub_art.nbr_like-1
-            db.session.delete(like)
-            db.session.commit()
-        #Envoie des données
-        pub_one=render_template('sijax/page_stat.html', une_pub=pub_art)
-        obj_response.html('#page_stat',pub_one)
-    
-    def commentaire(obj_response, commentaire):
-        form=FormCommetaire(data=commentaire)
-        article_pu=Publication.query.filter_by(slug=slug).first_or_404()
-        if form.commmentaire.errors:
-            obj_response.html('#erreur',','.join(form.commmentaire.errors))
-        else:
-            #Commentaire de l'utilisataire
-            commentaire_une=Commentaire()
-            #Les champs d'enregistrement.
-            commentaire_une.commentaire = form.commmentaire.data
-            commentaire_une.statut = True
-            commentaire_une.primaire = True
-            commentaire_une.secondaire = False
-            commentaire_une.vist_id=user_mac()
-            commentaire_une.publication_id =article_pu.id 
-            #Enregistrement dans le formulaire pour vérification
-            form.populate_obj(commentaire_une)
-            #Enregistrement des information
-            article_pu.nbr_cmt=article_pu.nbr_cmt+1
-            db.session.add(commentaire_une)
-            db.session.commit()
-            #Les données
-            commentaire_pub=Commentaire.query.filter_by(publication_id=article_pu.id, statut=True).order_by(Commentaire.id.asc()).all()
-            pub_one=render_template('sijax/commentaire.html', commentaire_pub=commentaire_pub)
-            obj_response.html('#commet',pub_one)
-            pub_one_c=render_template('sijax/page_stat.html', une_pub=article_pu)
-            obj_response.html('#page_stat',pub_one_c)
-
-    if g.sijax.is_sijax_request:
-        g.sijax.register_callback('like_page', like_page)
-        g.sijax.register_callback('commentaire', commentaire)
-
+    #Article de verification.
+    article_pu=Publication.query.filter_by(slug=slug).first_or_404()
+    #Visteur en ligne
+    lesvisteurs()
+    # L'utilisateur en cours
+    mac_utilisateur=user_mac()
         
-        return g.sijax.process_request()
-    else:
-        title=title_page("Actualité")
-        #Article de verification.
-        article_pu=Publication.query.filter_by(slug=slug).first_or_404()
-        #Visteur en ligne
-        lesvisteurs()
-        # L'utilisateur en cours
-        mac_utilisateur=user_mac()
-        
-        if article_pu is not None:
-            session["id_pu"] = article_pu.id
+    if article_pu is not None:
+        session["id_pu"] = article_pu.id
 
-        #Nombre des lis de l'article
-        article=ver_enre_article(article_pu.id)
-        var_lu_art=ver_enre_lu(article_pu.id)
-        enr_art(article,var_lu_art,article_pu)
-        #Formulaire
-        form=FormCommetaire()
-        comm=FormCommetaired()
-        commentaire_pub=Commentaire.query.filter_by(publication_id=article_pu.id, statut=True).order_by(Commentaire.id.desc()).all()
-        pub_meilleur=Publication.query.filter(Publication.id!=article_pu.id, Publication.statut==True, Categorie.nom=='Actualités').order_by(Publication.id.desc()).limit(6).all()
-        return render_template('asdi/une_pub.html',comm=comm, title=title, une_pub=article_pu, form=form, commentaire_pub=commentaire_pub, pub_meilleur=pub_meilleur)
+    #Nombre des lis de l'article
+    article=ver_enre_article(article_pu.id)
+    var_lu_art=ver_enre_lu(article_pu.id)
+    enr_art(article,var_lu_art,article_pu)
+    #Formulaire
+    photo=Photo.query.filter(Album.statut==True).order_by(Photo.id.asc()).limit(10).all() #Les photos
+    pub_meilleur=Publication.query.filter(Publication.nbr_lu > 10 , Publication.statut==True, Categorie.nom=='Actualités').order_by(Publication.nbr_lu.desc()).limit(6).all()
+    album=Album.query.filter_by(statut=True).order_by(Album.id.asc()).all()
+    #Fichier encours d'éxecution
+    fichier_docu=Fichier.query.filter_by(publication_id=article_pu.id).first()
+    return render_template('asdi/actua_une.html',title="Actualité", page="Actualité",pub_meilleur=pub_meilleur, une_pub=article_pu, photos=photo, album=album, fichier_docu=fichier_docu)
 
 
 @asdi.route('/commentaire/<int:id_pub>/<int:id>', methods=['GET','POST'])
@@ -182,7 +128,7 @@ def commentaire_secondaire(id_pub,id):
 
     return render_template('asdi/une_pub.html',comm=comm, title=title, une_pub=article_pu, form=form, commentaire_pub=commentaire_pub)
 
-@asdi.route('/actualites')
+@asdi.route('/actualites.html')
 def actualite():
     #Titre de l'onglet
     title=title_page('Actualités')
@@ -194,9 +140,8 @@ def actualite():
     page= request.args.get('page', 1, type=int)
     pub=Publication.query.filter(Publication.statut==True, Categorie.nom=='Actualités').order_by(Publication.id.desc()).paginate(page=page, per_page=3)
     pub_meilleur=Publication.query.filter(Publication.nbr_lu > 10 , Publication.statut==True, Categorie.nom=='Actualités').order_by(Publication.nbr_lu.desc()).limit(6).all()
-    
-    return render_template('asdi/actualites.html',title=title, pub=pub, pub_meilleur=pub_meilleur)
-
+    photo=Photo.query.filter(Album.statut==True).order_by(Photo.id.asc()).limit(10).all() #Les photos
+    return render_template('asdi/actua.html',title=title, pub=pub, pub_meilleur=pub_meilleur, page="Actualités", photos=photo)
 
 @asdi.route('/vision')
 def vision():
@@ -208,17 +153,56 @@ def vision():
     mac_utilisateur=user_mac()
     return render_template('asdi/vision.html',title=title)
 
-
-@asdi.route('/mission')
-def mission():
+@asdi.route('/contact.html')
+def contact():
     #Titre de l'onglet
-    title=title_page("Mission")
+    title=title_page("Contact")
     #Visteur en ligne
     lesvisteurs()
     # L'utilisateur en cours
     mac_utilisateur=user_mac()
 
+    return render_template('asdi/contact.html',title=title)
 
-    return render_template('asdi/domaine.html',title=title)
+@asdi.route('/galerie.html')
+def galerie():
+    #Titre de l'onglet
+    title=title_page("Gélerie")
+    #Visteur en ligne
+    lesvisteurs()
+    # L'utilisateur en cours
+    mac_utilisateur=user_mac()
+    page="Galerie"
+    pub=Publication.query.filter(Publication.statut==True, Categorie.nom=='Actualités', Publication.nbr_lu > 5 ).order_by(Publication.id.asc()).limit(6).all()
+    photo=Photo.query.filter(Album.statut==True).order_by(Photo.id.asc()).limit(10).all() #Les photos
+    album=Album.query.filter_by(statut=True).order_by(Album.id.asc()).all()
+    return render_template('asdi/galerie.html',title=title, page=page, pub=pub, photos=photo, album=album)
 
+@asdi.route('/apropos.html')
+def apropos():
+    #Titre de l'onglet
+    title=title_page('Apropos de nous')
+    #Visteur en ligne
+    lesvisteurs()
+    # L'utilisateur en cours
+    mac_utilisateur=user_mac()
+    page="Qui sommes-nous"
+    
+    return render_template('asdi/about.html',title=title, page=page)
+
+@asdi.route('/<int:id>/galerie.html')
+def galerie_trie(id):
+    #Titre de l'onglet
+    title=title_page("Gélerie")
+    #album encours
+    nom_al=Album.query.filter_by(id=id).first_or_404()
+    #Visteur en ligne
+    lesvisteurs()
+    # L'utilisateur en cours
+    mac_utilisateur=user_mac()
+    page="Galerie"
+    pub=Publication.query.filter(Publication.statut==True, Categorie.nom=='Actualités', Publication.nbr_lu > 5).order_by(Publication.id.asc()).limit(6).all()
+    photo=Photo.query.filter(Album.statut==True, Album.id==id).order_by(Photo.id.asc()).all() #Les photos
+    album=Album.query.filter(Album.id!=id).order_by(Album.id.asc()).all()
+    return render_template('asdi/galerie_trie.html',title=title, page=page,nom_album=nom_al, pub=pub, photos=photo, album=album)
 

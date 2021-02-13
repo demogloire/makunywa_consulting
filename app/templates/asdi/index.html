@@ -1,145 +1,381 @@
-{% extends "layout/internaute.html" %}
-
-
+{% extends "layout/ucp.html" %}
 
 {% block meta %}
 <meta name="robots" content="index">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <link rel="shortcut icon" type="image/x-icon" href="{{url_for('static',filename='logo_t.png')}}">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta property="og:site_name" content="ASDI-RDC">
+<meta property="og:site_name" content="UCP">
+<meta property="og:title" content="Accueil">
 
 {% endblock meta %}
 
-{% block othercss %}
-<link href="{{ url_for('static', filename='card.css')}}" rel="stylesheet">
-
-
+{% block css %}
+<style>
+    .highlight-word {
+      position: relative;
+      z-index: 0;
+    /* prevent the highlight from breaking since it is horizontal   */
+      white-space: nowrap;
+    }
+    .highlight-word:before {
+        content: '';
+        /* background: url(https://cdn2.hubspot.net/hubfs/1951809/text-highlight.png?t=1542708765973) no-repeat center center; */
+        background-size: 100% auto;
+        width: 108%;
+        height: 100%;
+        display: block;
+        position: absolute;
+        z-index: -1;
+        transform: translate(-3%,0);
+    }
+    
+    
+    </style>
+    
 {%endblock%}
 
+
 {% block body %}
-{% include 'element/menu.html' %}
-{% include 'element/slider.html' %}
-{% include 'element/agir.html' %}
-{% include 'element/mission.html' %}
-{% include 'element/domaine.html' %}
-{% include 'element/aide.html' %}
+{% include 'element/upc/header.html' %}
+{% include 'element/upc/slider.html' %}
 
 
-<!-- PUBLICATION -->
-{%if pub !=[]%}
-<section class="home-blog-area pb-padding section-padding30">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-xl-10 col-lg-10 ">
-                <!-- Section Tittle -->
-                <div class="section-tittle text-center mb-80">
-                    <h2 style="color:#AC9757; font-weight: bold;">Nos dernières publications</h2>
-                    <p
-                        style="font-size: 30px; color: black; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
-                        Suivez les actualités de l'<b style="color: black;">A</b>ction de <b style="color: black;">
-                            S</b>olidarité pour le <b style="color: black;">D</b>éveloppement <b
-                            style="color: black;">I</b>ntegré - RDC</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            {%for publication in pub%}
-            <div class="col-md-4">
-                <div class="card card-blog">
-                    <div class="card-image">
-                        <a href="#"> <img class="img" height="375.4px" width="370px"
-                                src="{{url_for('static', filename='publication/{}'.format(publication.url_img))}} ">
-                        </a>
-                        <div class="ripple-cont"></div>
-                    </div>
-                    <div class="table">
-                        <br>
-                        <div>
-                            <ul class="blog-info-link">
-                                <li><a href="#"><i class="far fa-thumbs-up"></i>{{publication.nbr_like}}</a></li>
-                                <li><a href="#"><i class="fa fa-eye"></i>{{publication.nbr_lu}}</a></li>
-                                <li><a href="#"><i class="far fa-comments"></i> </i>{{publication.nbr_cmt}}</a></li>
-                            </ul>
-                        </div>
 
-                        <h4 class="card-caption">
-                            <a href="{{url_for('asdi.article', slug=publication.slug)}}  "
-                                style="font-size: 20px;">{{publication.titre}} </a>
-                        </h4>
-                        <div class="ftr">
-                            <div class="author">
-                            </div>
-                            {%if publication.date_pub==publication.date_mod%}
-                            <div class="stats"> <i class="fa fa-clock-o"></i> {{timeagos(publication.date_pub)}} </div>
-                            {%else%}
-                            <div class="stats"> <i class="fa fa-clock-o"></i> {{timeagos(publication.date_mod)}} </div>
-                            {%endif%}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {%endfor%}
-        </div>
-        <div class="row" style="margin-top: 20px;">
-            <div class="col-md-12 text-center">
-                <a href="#" class="border-btn">Plus d'actualités</a>
-            </div>
 
-        </div>
-    </div>
-</section>
-{%endif%}
+	<!-- What We Section -->
+	<section class="what-we-section">
+		<div class="pattern-layer" style="background-image:url({{url_for('static', filename='ucp/images/background/pattern-7.png')}})"></div>
+		<div class="auto-container">
+			<div class="row clearfix">
+				
+				<!-- Title Column -->
+				<div class="title-column col-lg-5 col-md-12 col-sm-12">
+					<div class="inner-column">
+						<!-- Sec Title -->
+						<div class="sec-title">
+							<h2>Agissons ensemble</h2>
+							<div class="separate"></div>
+						</div>
+						<div class="text text-justify">
+							<p style="color: black;">
+								Pour faire de ce monde un lieu où les orphelins, les enfants abandonnés et démunis, vivent le paradis terrestre dans la famille d’adaptation.
+							</p>
+							<p style="color: black;">
+								Ils ont besoin que du logement, de la santé et de l’éducation, pour vivre leurs rêves et nous pensons qu’ensemble, nous pouvons leurs apporté une joie dans monde désespérer.
+							</p>
+						</div>
+						<a href="{{url_for('asdi.apropos')}}" class="theme-btn btn-style-one"><span class="txt">Savoir plus</span></a>
+						<div class="image">
+							<img src="{{url_for('static', filename='ucp/ch.png')}}" alt="" />
+						</div>
+					</div>
+				</div>
+				
+				<!-- Blocks Column -->
+				<div class="blocks-column col-lg-7 col-md-12 col-sm-12">
+					<div class="inner-column">
+						<div class="row clearfix">
+							
+							<!-- Services Block Two -->
+							<div class="services-block-two col-lg-6 col-md-6 col-sm-12">
+								<div class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+									<div class="icon-box">
+										<span class="fa fa-university"></span>
+									</div>
+									<h3><a href="{{url_for('asdi.apropos')}}">Education</a></h3>
+									<div class="text text-justify">L’arme la plus puissante que l’on peut procurer aux enfants est l’éducation, l’environnement social et économique dans lequel vivent les orphelins,  les enfants abandonnés et démunis, ne leurs donnent pas cette opportunité.</div>
+								</div>
+							</div>
+							
+							<!-- Services Block Two -->
+							<div class="services-block-two col-lg-6 col-md-6 col-sm-12">
+								<div class="inner-box wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
+									<div class="icon-box">
+										<span class="fa fa-hospital-o"></span>
+									</div>
+									<h3><a href="{{url_for('asdi.apropos')}}">Santé</a></h3>
+									<div class="text text-justify">Les enfants en situation difficile, n’ont pas accès à la santé, vue leurs situations, Uvira Children’s Project, apporte une assistance sanitaire à ces enfants, pour espérer une longévité et une santé mentale harmonieuse.</div>
+									
+								</div>
+							</div>
+							
+							<!-- Services Block Two -->
+							<div class="services-block-two col-lg-6 col-md-6 col-sm-12">
+								<div class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+									<div class="icon-box">
+										<span class="fa fa-home"></span>
+									</div>
+									<h3><a href="{{url_for('asdi.apropos')}}">Logement</a></h3>
+									<div class="text text-justify">Les enfants abandonnés et les orphelins voir même les démunis, tous ont droit à un toit, les guerres ont détruit les milieux, appauvri les familles et jeter les enfants dans la rue, Uvira Children’s Project leurs procurent un orphelinat.</div>
+									
+								</div>
+							</div>
+							
+							<!-- Services Block Two -->
+							<div class="services-block-two col-lg-6 col-md-6 col-sm-12">
+								<div class="inner-box wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
+									<div class="icon-box">
+										<span class="fa fa-leaf"></span>
+									</div>
+									<h3><a href="{{url_for('asdi.apropos')}}">Alimentation</a></h3>
+									<div class="text text-justify">Une bonne alimentation garantie, une bonne croissance. Pour pallier à ce défis, nous leurs donnons une alimentation saine et équilibrée, nous faisons de l’agropastorale pour aider la communauté et réduire la famine. </div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</section>
+	<!-- End What We Section -->
 
-<div class="container" style="margin-bottom: 50px; margin-top: 70px;">
-    <h2 style="color: black; text-align:center;border-bottom:solid 1px #eee; font-size: 20px; font-size: 30px; font-weight: bold;">
-        Nos Partenaires</h2>
-        <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-                <div id="Carousel" class="carousel slide">
-                    <!-- Carousel items -->
-                    <div class="carousel-inner">
-    
-                        <div class="item active">
-                            <div class="row text-center" style="margin-top:10px;">
-                                <div class="col-md-2 col-xs-4 text-center"><a href="https://www.unocha.org/drc" class="thumbnail"><img
-                                            src="{{url_for('static', filename='logo/ocha.png')}}" alt="Image"
-                                            style="height:80px; width: 170px;"></a></div>
-                                <div class="col-md-2 col-xs-4 text-center"><a href="https://www.unicef.org/drcongo/"
-                                        class="thumbnail"><img src="{{url_for('static', filename='logo/unice.png')}}"
-                                            alt="Image" style="height:75px; width: 180px;"></a></div>
-                                <div class="col-md-2 col-xs-4"><a href="https://www.sante.gouv.cd/" class="thumbnail"><img
-                                            src="{{url_for('static', filename='logo/sante.png')}}" alt="Image"
-                                            style="height:70px; width: 170px;"></a></div>
-                                <div class="col-md-2 col-xs-4 text-center"><a href="www.ned.org"
-                                        class="thumbnail"><img src="{{url_for('static', filename='logo/ned.png')}}"
-                                            alt="Image" style="height:60px; width: 170px;"></a></div>
-    
-                                <div class="col-md-2 col-xs-4 text-center"><a href="https://www.rescue.org/country/democratic-republic-congo"
-                                        class="thumbnail"><img src="{{url_for('static', filename='logo/don.jpg')}}"
-                                            alt="Image" style="height:70px; width: 70px;"></a></div>
-                                <div class="col-md-2 col-xs-4 text-center"><a href="https://drc.unfpa.org/fr"
-                                        class="thumbnail"><img src="{{url_for('static', filename='logo/unfpa.png')}}"
-                                            alt="Image" style="height:40px; width: 150px;"></a></div>
-                            </div>
-                            <!--.row-->
-                        </div>
-                        <!--.item-->
-                    </div>
-                </div>
-            </div>
-        </div>
-</div>
+		<!-- Experiance Section -->
+		<section class="experiance-section style-two">
+			<div class="pattern-layer" style="background-image:url(images/background/pattern-1.png)"></div>
+			<div class="auto-container">
+				<div class="row clearfix">
+					<!-- Title Column -->
+					<div class="title-column col-lg-6 col-md-12 col-sm-12">
+						<div class="inner-column">
+							<!-- Sec Title -->
+							<div class="sec-title">
+								<h2>Défis de la socité</h2>
+								<div class="separate"></div>
+							</div>
+							<div  style="color: black;" class="text text-justify">La pauvreté accrue de la République Démocratique du Congo, causée par des guerres, ont 
+								rendues la vie difficile à la population, en entrainant sur sa route, la perte en vie humaine, poussant 
+								aux enfants à se retrouvé orphelin, les pillages au cours des guerres ont appauvri les familles en menant
+								 une vie inférieure aux normes internationales, sans oublier les épidémies et les virus qui rongent la société, 
+								 avec  ces difficultés. <br><br> Pour pallier à ces grands défis, l’ONG Uvira Children’s Project, poursuit la mission de promouvoir la 
+								 situation des personnes en difficulté  et surtout les enfants pour leurs donné une avenir plein 
+								 d’espoir. </div>
+						
+						</div>
+					</div>
+					
+					<!-- Video Column -->
+					<div class="col-lg-6 col-md-12 col-sm-12">
+						<div class="inner-column">
+							<div class="image inner-box wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
+								<img class="img-fluid" src="{{url_for('static', filename='ucp/images/main-slider/ima.png')}}" alt="" />
+							</div>							
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</section>
+		<!-- End Experiance Section -->
 
+		<div class="jumbotron">
+			<div class="container text-center text-lg-left">
+			  
+			  <div class="row">
+				<div class="col-lg-8">
+					<h1 class="display-4">Ils ne compent qu'à vous.
+		   <span class="highlight-word">Vous pouvez aussi les aidés.</span></h1>
+			<p class="lead">Les enfants en difficultés sont de plus en plus nombreux en RDC mais votre aide, soutien et accompagnement des enfants en difficultés est un plus pour un monde meilleur. </p>
+				  <span class="text-center d-inline-block">
+					<a class="btn btn-primary btn-lg w-100" href="#" role="button">Faire un don</a>
+				  
+				  </span>
+				  
+				</div>
+				<div class="col-lg-4 align-items-center d-flex">
+				  <img src="{{url_for('static', filename='ucp/images/main-slider/en.png')}}" alt="" class="img-fluid">
+				</div>
+			  </div>
+		  
+		   
+			  </div>
+		  </div>
+
+  
+
+	{%if photos !=[]%}
+	<div class="container gallery-container">
+
+		<h1 class="text-center">Nos dernières souvenirs</h1>
+		<br>	
+		<div class="tz-gallery" >
+	
+			<div class="row">
+				{%for photo in photos%}
+				<div class="col-sm-12 col-md-4">
+					<a class="lightbox" href="{{url_for('static', filename='publication/{}'.format(photo.photo))}}">
+						<img src="{{url_for('static', filename='publication/{}'.format(photo.photo))}}" alt="Bridge">
+					</a>
+				</div>
+				{%endfor%}
+
+			</div>
+		</div>
+	</div>
+	{%endif%}
+	<br><br>
+	
+	<!-- News Section -->
+	<!-- News Section Two -->
+	{%if pub !=[]%}
+	<section class="news-section-three">
+		<div class="auto-container">
+			
+			<!-- Sec Title -->
+			<div class="sec-title centered">
+            	<h2>Nos dernières nouvelles</h2>
+                <div class="separate"></div>
+			</div>
+			
+			<div class="row clearfix">
+				<!-- News Block -->
+				{%for publication in pub%}
+				<div class="news-block-four col-lg-4 col-md-6 col-sm-12">
+					<div class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+						<div class="image">
+							<a href="{{url_for('asdi.article', slug=publication.slug)}} "><img src="{{url_for('static', filename='publication/{}'.format(publication.url_img))}}" alt="" /></a>
+						</div>
+						<div class="lower-content">
+							<ul class="post-meta">
+								<li> <i class="fa fa-user"></i> {{publication.user_pub.prenom}}</li>
+								<li>{%if publication.date_pub==publication.date_mod%}
+									<i class="fa fa-clock-o"></i> {{timeagos(publication.date_pub)}} 
+									{%else%}
+									<i class="fa fa-clock-o"></i> {{timeagos(publication.date_mod)}} 
+									{%endif%}</li>
+								<li><i class="fa fa-eye"></i> {{publication.nbr_lu}}</li>
+							</ul>
+						</div>
+							<h3><a href="{{url_for('asdi.article', slug=publication.slug)}}">{{publication.titre}}</a></h3>
+							<a href="{{url_for('asdi.article', slug=publication.slug)}} " class="read-more btn bt-sm btn-info">Lire</a>
+						</div>
+					</div>
+				</div>
+				{%endfor%}
+		</div>
+	
+	</section>
+	{%endif%}
+	<!-- End News Section Two -->
+	
+
+	
+	<!-- Call To Action Three Section -->
+	<section class="call-to-action-section-three" style="background-image: url({{url_for('static', filename='ucp/images/main-slider/bg-footer.jpg')}})">
+		<div class="auto-container">
+			<div class="row clearfix">
+				
+				<!-- Title Column -->
+				<div class="title-column col-lg-8 col-md-12 col-sm-12">
+					<div class="inner-column">
+						<h2>Les conflits armés, ont affecté plus d'un million d'enfants en RDC, Uvira Children's Project et vous peut assister.</h2>
+					</div>
+				</div>
+				
+				<!-- Button Column -->
+				<div class="btn-column col-lg-4 col-md-12 col-sm-12">
+					<div class="inner-column">
+						<div class="number">+243 976 359 001</div>
+						<a href="{{url_for('asdi.contact')}}" class="theme-btn btn-style-three"><span class="txt">Contactes-nous</span></a>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</section>
+	<!-- End Call To Action Three Section -->
+	
+	<!-- Main Footer -->
+    <footer class="main-footer" style="background-image: url({{url_for('static', filename='ucp/images/background/map-pattern.png')}})">
+		<div class="footer-social-box">
+			<div class="auto-container">
+				<ul class="social-nav">
+					<li><a href="#"><span class="fa fa-facebook-f"></span></a></li>
+					<li><a href="#"><span class="fa fa-twitter"></span></a></li>
+					<li><a href="#"><span class="fa fa-vk"></span></a></li>
+					<li><a href="#"><span class="fa fa-linkedin"></span></a></li>
+					<li><a href="#"><span class="fa fa-instagram"></span></a></li>
+				</ul>
+			</div>
+		</div>
+    	<div class="auto-container">
+        	<!--Widgets Section-->
+            <div class="widgets-section">
+            	<div class="row clearfix">
+					
+					<!-- Footer Column -->
+					<div class="footer-column col-lg-4 col-md-6 col-sm-12">
+						<div class="footer-widget logo-widget">
+							<div class="logo">
+								<a href="{{url_for('asdi.accueil')}}"><img src="{{url_for('static', filename='ucp/logo.png')}}" height="100px" width="1500px" alt="" /></a>
+							</div>
+							<div class="text text-justify">
+								Uvira Children’s Project, pour suit le but 
+								faire prendre conscience aux populations ciblées 
+								qu’avec l’aide de l’organisation et une implication 
+								active, elles détiennent la clé de l’amélioration 
+								de leurs conditions des vies. </div>
+						</div>
+					</div>
+					
+					<!-- Footer Column -->
+					<div class="footer-column col-lg-4 col-md-6 col-sm-12">
+						<div class="footer-widget links-widget">
+							<div class="footer-title">
+								<h4>Contactez - nous</h4>
+							</div>
+							<ul class="contact-link">
+								<li><span>Phone:</span> +243 976 359 001</li>
+								<li><span>E-mail:</span> info@uvirachildrensproject.org</li>
+								<li><span>Adresse:</span> En face de mosque, Mulongwe.</li>
+							</ul>
+						</div>
+					</div>
+					
+					<!-- Footer Column -->
+					<div class="footer-column col-lg-4 col-md-6 col-sm-12">
+						<div class="footer-widget newsletter-widget">
+							<div class="footer-title">
+								<h4>Bulletin d'information.</h4>
+							</div>
+							<div class="text">Abonnez – vous à notre bulletin d’information pour vous envoyer nos publications quotidiennes.</div>
+							<div class="newsletter-form">
+								<form method="post" action="">
+									<div class="form-group">
+										<input type="email" name="email" value="" placeholder="Votre email" required="">
+										<button type="submit" class="theme-btn submit-btn"><span class="txt">Abonnez - vous</span></button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+		<div class="footer-bottom">
+			<div class="auto-container">
+				<div class="clearfix">
+					<div class="pull-left">
+						<div class="copyright"><a href="www.standuprdc.net">Par StandUp RDC</a></div>
+					</div>
+					<div class="pull-right">
+						<div class="scroll-to-top scroll-to-target" data-target="html">En haut</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</footer>
 {% endblock body %}
 
-{% block sijax %}
+{% block js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $('#Carousel').carousel({
-            interval: 3000
-        })
-    });
+    baguetteBox.run('.tz-gallery');
 </script>
 
 {% endblock %}

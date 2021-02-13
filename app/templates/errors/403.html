@@ -1,0 +1,31 @@
+{% extends "layout/ucp.html" %}
+
+{% block meta %}
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<link rel="shortcut icon" type="image/x-icon" href="{{url_for('static',filename='logo.jpg')}}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock meta %}
+
+
+
+
+{% block body %}
+
+<section class="error-section">
+    <div class="auto-container">
+        <div class="content">
+            <h1>403</h1>
+            <h2>Oops! Page non introuvable</h2>
+            <div class="text">Vous ne disposez pas des autorisations suffisantes pour accéder à cette page. </div>
+            <a href="{{url_for('asdi.accueil')}}" class="theme-btn btn-style-one"><span class="txt">Page d'accueil</span></a>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+{% endblock body %}

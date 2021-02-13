@@ -1,0 +1,108 @@
+{% extends "layout/ucp.html" %}
+
+{% block meta %}
+<meta name="robots" content="index">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<link rel="shortcut icon" type="image/x-icon" href="{{url_for('static',filename='logo_t.png')}}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:site_name" content="UCP">
+<meta property="og:title" content="Galerie">
+{% endblock meta %}
+
+{%block css%}
+
+</style>
+{%endblock%}
+
+
+{% block body %}
+{% include 'element/upc/header_two.html' %}
+{% include 'element/upc/brac.html' %}
+<div class="sidebar-page-container">
+    <div class="auto-container">
+        <div class="row clearfix">
+            
+            <!-- Content Side -->
+            <div class="content-side col-lg-8 col-md-12 col-sm-12">
+            {%if photos !=[]%}
+            <div class="container gallery-container">
+            <div class="tz-gallery" >
+        
+			<div class="row">
+				{%for photo in photos%}
+				<div class="col-sm-12 col-md-4">
+					<a class="lightbox" href="{{url_for('static', filename='publication/{}'.format(photo.photo))}}">
+						<img src="{{url_for('static', filename='publication/{}'.format(photo.photo))}}" alt="Bridge">
+					</a>
+			    </div>
+			{%endfor%}
+			</div>
+
+                </div>
+            </div>
+            {%else%}
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <p class="text-center" style="margin-top:150px">
+                        <i class="fa fa-picture-o fa-5x text-center"></i>
+                        <h4 class="text-center">AUCUNE IMAGE</h4>
+                    </p> 
+                </div>
+            </div>
+	        {%endif%}
+
+            </div>
+            
+               <!-- Sidebar Side -->
+            <div class="sidebar-side col-lg-4 col-md-12 col-sm-12">
+                <aside class="sidebar">
+                    <div class="sidebar-inner">
+                        {%if album!=[]%}
+                        <div class="sidebar-widget categories-widget">
+                            <div class="sidebar-title">
+                                <h2>Evenements</h2>
+                            </div>
+                            <div class="widget-content">
+                                <ul class="blog-cat-two">
+                                    {%for alb in album%}
+                                    <li><a href="{{url_for('asdi.galerie_trie', id=alb.id)}}">{{alb.noms}} <span>( {{alb.nbr_picture}} )</span></a></li>
+                                    {%endfor%}
+                                </ul>
+                            </div>
+                        </div>
+                        {%endif%}
+                        <!-- Categories Widget -->
+                        {%if pub!=[]%}
+                        <div class="sidebar-widget popular-posts">
+                            <div class="sidebar-title">
+                                <h2>Les plus lus</h2>
+                            </div>
+                            {%for publication in pub%}
+                            <div class="widget-content">
+                                <article class="post">
+                                    <figure class="post-thumb"><img src="{{url_for('static', filename='publication/{}'.format(publication.url_img))}}" alt=""><a href="{{url_for('asdi.article', slug=publication.slug)}} " class="overlay-box"><span class="icon fa fa-link"></span></a></figure>
+                                    <div class="text"><a href="{{url_for('asdi.article', slug=publication.slug)}} ">{{publication.titre}}</a></div>
+                                    <div class="post-info">{{timeagos(publication.date_pub)}}</div>
+                                </article>
+                            </div>
+                            {%endfor%}
+                        </div>
+                        {%endif%}                       
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'element/upc/footer.html' %}
+
+{% endblock body %}
+
+{% block js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+<script>
+    baguetteBox.run('.tz-gallery');
+</script>
+
+{% endblock %}

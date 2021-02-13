@@ -1,0 +1,212 @@
+{% extends "layout/ucp.html" %}
+
+{% block meta %}
+<meta name="robots" content="index">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<link rel="shortcut icon" type="image/x-icon" href="{{url_for('static',filename='logo_t.png')}}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:site_name" content="UCP">
+<meta property="og:title" content="Apropos de nous">
+{% endblock meta %}
+
+{%block css%}
+<style>
+
+    #about {
+    background: url("{{url_for('static',filename='ucp/im.jpg')}}") center center no-repeat;
+    background-size: cover;
+}
+
+.about-text {
+    background: #F58634;
+    color: white;
+    padding: 1.875rem;
+}
+
+#cover {
+    background: #222 url('http://www.goodwp.com/images/201402/goodwp.com_30727.jpg') center center no-repeat;
+    background-size: cover;
+    color: white;
+    height: 100%;
+    text-align: center;
+    display:flex;
+    align-items: center;
+}
+#cover-caption {
+   margin: auto;
+
+}
+
+.module {
+    padding: 140px 0;
+}
+
+.module-title {
+    font-size: 20px;
+    letter-spacing: 10px;
+    margin-bottom: 75px;
+}
+
+.font-alt {
+    font-family: "Dosis", sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.font-inc {
+    font-family: "Inconsolata", serif;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.content-box {
+    margin: 25px auto;
+}
+
+.content-box-icon {
+    font-size: 4rem;
+    text-align: center;
+}
+
+.content-box-title {
+    font-size: 1.5rem;
+    letter-spacing: 5px;
+    color: #111;
+}
+
+.content-box-text {
+    color: #777;
+}
+
+</style>
+{%endblock%}
+
+
+{% block body %}
+{% include 'element/upc/header_two.html' %}
+{% include 'element/upc/brac.html' %}
+
+
+<section class="contact-page-section">
+    <div class="auto-container">
+        <div class="row clearfix">
+            
+            <!-- Column -->
+            <div class="form-column col-lg-8 col-md-12 col-sm-12">
+                <div class="inner-column">
+                    <!-- Sec Title -->
+                    <div class="sec-title">
+                        <h2>Contactez-nous</h2>
+                        <div class="separate"></div>
+                    </div>
+                    
+                    <!-- Contact Form -->
+                    <div class="contact-form">
+                            
+                        <!-- Contact Form -->
+                        <form method="post" action="" id="contact-form" novalidate="novalidate">
+                            <div class="row clearfix">
+                                
+                                <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                    <input type="text" name="firstname" placeholder="Nom" required="">
+                                </div>
+                                
+                                <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                                    <input type="email" name="email" placeholder="E-mail" required="">
+                                </div>
+                                
+                                <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                                    <input type="text" name="subject" placeholder="Objet" required="">
+                                </div>
+                                
+                                <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                    <textarea class="darma" name="message" placeholder="Message..."></textarea>
+                                </div>
+                                
+                                <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                    <button class="theme-btn submit-btn" type="submit" name="submit-form">Envoyer</button>
+                                </div>
+                                
+                            </div>
+                        </form>
+                            
+                    </div>
+                    <!-- End Contact Form -->
+                    
+                </div>
+            </div>
+            
+            <!-- Column -->
+            <div class="info-column col-lg-4 col-md-12 col-sm-12">
+                <div class="inner-column">
+                    <!-- Sec Title -->
+                    <div class="sec-title">
+                        <h2>Info de contact</h2>
+                        <div class="separate"></div>
+                    </div>
+                    
+                    <ul class="contact-info">
+                        <li>
+                            <span class="icon flaticon-placeholder-2"></span> 
+                            <strong>Adresse</strong>
+                            Uvira, en face mosque
+                        </li>
+
+                        <li>
+                            <span class="icon flaticon-call"></span>
+                            <strong> +243 976 359 001 </strong>
+                            <a href="info@uvirachildrensproject.org">info@uvirachildrensproject.org</a>
+                        </li>
+
+                        <li>
+                            <span class="icon flaticon-24-hours-2"></span>
+                            <strong>Heure de travail</strong> 
+                            Lun - Sam: 08h à 17h00
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<section class="call-to-action-section-three" style="background-image: url({{url_for('static', filename='ucp/images/main-slider/bg-footer.jpg')}})">
+		<div class="auto-container">
+			<div class="row clearfix">
+				
+				<!-- Title Column -->
+				<div class="title-column col-lg-8 col-md-12 col-sm-12">
+					<div class="inner-column">
+						<h2>Les conflits armés sont un problème persistant dans des régions spécifiques de la RDC, et les enfants sont très vulnérables dans ces situations car ils sont impuissants face à la brutalité des groupes militants.</h2>
+					</div>
+				</div>
+				
+				<!-- Button Column -->
+				<div class="btn-column col-lg-4 col-md-12 col-sm-12">
+					<div class="inner-column">
+						<div class="number">+243 976 359 001</div>
+						<a href="{{url_for('asdi.contact')}}" class="theme-btn btn-style-three"><span class="txt">Contactes-nous</span></a>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+</section>
+{% include 'element/upc/footer.html' %}
+
+
+
+
+
+
+
+
+{% endblock body %}
+
+{%block js%}
+<script>
+    
+</script>
+{%endblock%}

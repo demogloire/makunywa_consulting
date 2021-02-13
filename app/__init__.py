@@ -54,17 +54,17 @@ def create_app(config_name):
     Utilisation des stucture Blueprint
     '''
 
-    # @app.errorhandler(403)
-    # def forbidden(error):
-    #     return render_template('errors/403.html', title='Forbidden'), 403
+    @app.errorhandler(403)
+    def forbidden(error):
+        return render_template('errors/403.html', title='Forbidden'), 403
 
-    # @app.errorhandler(404)
-    # def page_not_found(error):
-    #     return render_template('errors/404.html', title='Page non trouvée'), 404
+    @app.errorhandler(404)
+    def page_not_found(error):
+        return render_template('errors/404.html', title='Page non trouvée'), 404
 
-    # @app.errorhandler(500)
-    # def internal_server_error(error):
-    #     return render_template('errors/500.html', title='Erreur serveur'), 500
+    @app.errorhandler(500)
+    def internal_server_error(error):
+        return render_template('errors/500.html', title='Erreur serveur'), 500
     
     #Authentification
     from .authentification import auth as auth_blueprint
@@ -84,5 +84,8 @@ def create_app(config_name):
 
     from .asdi import asdi as asdi_blueprint
     app.register_blueprint(asdi_blueprint)
+    
+    from .album import album as album_blueprint
+    app.register_blueprint(album_blueprint)
     
     return app

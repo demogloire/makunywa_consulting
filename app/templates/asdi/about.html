@@ -1,0 +1,359 @@
+{% extends "layout/ucp.html" %}
+
+{% block meta %}
+<meta name="robots" content="index">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<link rel="shortcut icon" type="image/x-icon" href="{{url_for('static',filename='logo_t.png')}}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:site_name" content="UCP">
+<meta property="og:title" content="Apropos de nous">
+{% endblock meta %}
+
+{%block css%}
+<style>
+
+    #about {
+    background: url("{{url_for('static',filename='ucp/im.jpg')}}") center center no-repeat;
+    background-size: cover;
+}
+
+.about-text {
+    background: #F58634;
+    color: white;
+    padding: 1.875rem;
+}
+
+#cover {
+    background: #222 url('http://www.goodwp.com/images/201402/goodwp.com_30727.jpg') center center no-repeat;
+    background-size: cover;
+    color: white;
+    height: 100%;
+    text-align: center;
+    display:flex;
+    align-items: center;
+}
+#cover-caption {
+   margin: auto;
+
+}
+
+.module {
+    padding: 140px 0;
+}
+
+.module-title {
+    font-size: 20px;
+    letter-spacing: 10px;
+    margin-bottom: 75px;
+}
+
+.font-alt {
+    font-family: "Dosis", sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.font-inc {
+    font-family: "Inconsolata", serif;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.content-box {
+    margin: 25px auto;
+}
+
+.content-box-icon {
+    font-size: 4rem;
+    text-align: center;
+}
+
+.content-box-title {
+    font-size: 1.5rem;
+    letter-spacing: 5px;
+    color: #111;
+}
+
+.content-box-text {
+    color: #777;
+}
+
+</style>
+{%endblock%}
+
+
+{% block body %}
+{% include 'element/upc/header_two.html' %}
+{% include 'element/upc/brac.html' %}
+	<!-- Call To Action Three Section -->
+	<section class="experiance-section style-two" style="padding-top: 20px;">
+        <div class="pattern-layer"></div>
+        <div class="auto-container">
+            <div class="row clearfix">
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <div class="inner-column">
+                        <div class="image inner-box ">
+                            <img class="img-fluid" src="{{url_for('static', filename='ucp/enf.png')}}" alt="" />
+                        </div>							
+                    </div>
+                </div>
+                <!-- Title Column -->
+                <div class="title-column col-lg-6 col-md-12 col-sm-12">
+                    <div class="inner-column">
+                        <!-- Sec Title -->
+                        <div  style="color: black; font-size: 18px; position: relative;line-height: 1.7em;" class="text text-justify">
+                            Au cours des deux dernières décennies, plus de 6 millions de civils ont été tués par les forces armées negatives , et environ 5 millions de personnes ont été forcées de se déplacer, ce qui fait du conflit en RDC la plus grande situation de déplacement interne en Afrique . <br><br>
+                            Les enfants sont les premières victimes des conflits, déracinés de leurs maisons, écoles, familles, et communautés durant les conflits liés à la guerre. Les enfants entrent volontairement dans des déplacements forcés afin d’éviter d’être recrutés par des groupes armés. <br><br>
+                            Les enfants sont utilisés dans le cadre de tactiques militaires par 
+                            tous les groupes de combattants impliqués dans les conflits. Des attaques 
+                            planifiées sont également menées contre des enfants par des groupes armés et
+                            leurs maisons sont également détruites par des groupes armés qui les incendient 
+                            (cas des hauts plateaux d'uvira fizi et mwenga). 
+                        </div>
+                    
+                    </div>
+                </div>
+                
+                <!-- Video Column -->
+
+                
+            </div>
+        </div>
+    </section>
+
+<section id="about">
+    <div class="section-content">
+        <div class="container">
+            <div class="col-md-6">
+                <div class="about-text">
+                    <h3 id="vision">Vision</h3>
+                      <p class="lead text-justify">Les enfants en République démocratique du Congo vivent l’une des pires crises humanitaires du monde, où les conflits armés sont une réalité quotidienne et où des enfants sont recrutés et forcés de s’entraîner comme enfants soldats. La situation des droits de l’homme est grave pour les enfants et ils font face à une myriade de défis quotidiens: la pauvreté, la violence sexuelle, les maladies, et l’incapacité d’accéder à la nourriture et à l’eau potable. Leurs droits fondamentaux sont régulièrement enfreints et ils sont fréquemment exposés à la violence de groupes armés, dans certains cas enlevés et contraints aux forces militaires Etat des droits des enfants.</p>
+                      <p class="lead text-justify">Face à celà, l’UCP rêve d’une société dans la quelle les orphelins, les enfants abandonnés et démunis vivent le paradis terrestre dans la famille d’adaptation.
+                        Assurer la sécurité de l’enfant, sa santé, son éducation son développement social et culturel, son épanouissement personnel.
+                        </p>
+                </div>
+            </div>
+         </div>
+      </div>
+</section>   
+
+<section class="news-section-three">
+    <div class="auto-container">
+        
+        <!-- Sec Title -->
+        <div class="sec-title centered">
+            <h2 id="mission">Notre mission</h2>
+            <div class="separate"></div> <br>
+            <p style="color: black; font-size: 17px; position: relative;line-height: 1.7em;">UCP poursuit les missions visant l’amélioration de condition 
+                vie des enfants, les conflits armés sont un problème persistant 
+                dans des régions spécifiques de la RDC, et les enfants sont très 
+                vulnérables dans ces situations. Des bonnes conditions pour ces 
+                enfants un monde meilleur du future.</p>
+        </div>
+        
+    </div>
+
+</section>
+<!-- SERVICES -->
+
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12" >
+            <div class="inner-column">
+                <div class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms" >
+                    <img style="margin-top: 55px;" class="img-fluid box-shadow--4dp" src="{{url_for('static', filename='ucp/images/main-slider/bg-footer.jpg')}}" alt="" />
+                </div>							
+            </div>
+        </div>
+        <!-- Title Column -->
+        <div class=" col-lg-6 col-md-12 col-sm-12" style="background-image:url({{url_for('static', filename='ucp/images/background/pattern-1.png')}})">
+            <br><br>
+            <div class="sec-title">
+                <h2>Education</h2>
+                <div class="separate"></div>
+            </div>
+                <!-- Sec Title -->
+                <p  style="color: black; font-size: 17px; position: relative;line-height: 1.7em;" class="text-o text-justify">
+                    Pour les enfants orphelins comme tant d'autres en RDC, l’éducation est une voie vers un avenir plein d’espoir, mais l’éducation reste hors de portée pour près de 7 millions d’enfants 
+                    âgés de 5 à 17 ans. L’instabilité politique et les catastrophes naturelles ont empêché la RDC de parvenir à l’enseignement primaire universel pour les enfants. De plus, les principaux
+                    coûts financiers des dépenses directes et indirectes liées au soutien de l’éducation d’un enfant sont à la charge des parents. Il existe de graves disparités économiques entre les familles
+                    qui peuvent se permettre de prendre en charge les frais de scolarité de leurs enfants, disparités qui se traduisent par une répartition inégale des institutions scolaires et des infrastructures 
+                    dans le pays. <br><br>
+
+                    La qualité de l’éducation est une autre préoccupation, car le taux d’enseignants 
+                    qualifiés est très faible et les taux de redoublement et d’abandon scolaire sont
+                     élevés pour les enfants qui fréquentent l’école. D’autres barrières et 
+                     vulnérabilités socioculturelles telles que le travail des enfants, 
+                     le mariage des enfants, les conditions de santé, et les grossesses précoces 
+                     ont tout un impact sur les chances qu’un enfant puisse aller à l’école. <br><br>
+
+                     La probabilité d’aller à l’école pour les filles est plus préoccupante, 
+                     car UNICEF indique que 52,7% des filles de 5 à 17 ans ne vont pas à l’école en RDC.
+               </p>
+            
+
+        </div>
+        
+        <!-- Video Column -->
+
+    </div>
+    <div class="row">
+                <!-- Title Column -->
+                <div class=" col-lg-6 col-md-12 col-sm-12" style="background-image:url({{url_for('static', filename='ucp/images/background/pattern-1.png')}})">
+                    <br><br>
+                    <div class="sec-title">
+                        <h2>Santé</h2>
+                        <div class="separate"></div>
+                    </div>
+                        <!-- Sec Title -->
+                        <p  style="color: black; font-size: 17px; position: relative;line-height: 1.7em;" class="text-o text-justify">
+                            En RDC, le droit de l’enfant à la santé est gravement menacé dès sa naissance.  
+                            À plus grande échelle, la santé des Congolais est dans un état vulnérable en raison
+                            d’un système de santé faible lié à des niveaux de pauvreté extrêmes. <br><br>
+                            Il y a également plusieurs épidémies en cours qui tuent des milliers d’enfants en 
+                            RDC chaque année, et le système de santé est en mauvais état, incapable de supporter 
+                            des crises sanitaires. La rougeole, le choléra, et le paludisme ont ravagé le pays et 
+                            les enfants orphelins sont les principales victimes de ces maladies. Le choléra, 
+                            dû à des systèmes d’assainissement médiocres et à une eau potable impure, a tué 540
+                             personnes en 2019, dont la moitié fut des enfants. La rougeole, une épidémie plus 
+                             grave, a causé 6200 décès en 2019-2020 et 85% de ces décès étaient des enfants de 
+                             5 ans et moins, On estime que plus de 3,3 millions d’enfants sont privés de soins 
+                             de santé adéquats.
+                        </p>
+                </div>
+        <div class="col-lg-6 col-md-12 col-sm-12" >
+            <div class="inner-column">
+                <div class="inner-box wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms" >
+                    <img style="margin-top: 55px;" class="img-fluid box-shadow--4dp" src="{{url_for('static', filename='ucp/sa.jpg')}}" alt="" />
+                </div>							
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12" >
+            <div class="inner-column">
+                <div class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms" >
+                    <img style="margin-top: 55px;" class="img-fluid box-shadow--4dp" src="{{url_for('static', filename='ucp/images/main-slider/bg-s.jpg')}}" alt="" />
+                </div>							
+            </div>
+        </div>
+        <!-- Title Column -->
+        <div class=" col-lg-6 col-md-12 col-sm-12" style="background-image:url({{url_for('static', filename='ucp/images/background/pattern-1.png')}})">
+            <br><br>
+            <div class="sec-title">
+                <h2>Alimentation</h2>
+                <div class="separate"></div>
+            </div>
+                <!-- Sec Title -->
+                <p  style="color: black; font-size: 17px; position: relative;line-height: 1.7em;" class="text-o text-justify">
+                    Il a été documenté que 25% des enfants congolais sont de poids insuffisant et il existe un 
+                    problème généralisé d’anémie chez les enfants âgés de 6 mois à 5 ans. Le taux d’enfants 
+                    souffrant de malnutrition est aigu, avec au moins deux millions d’enfants souffrant de 
+                    malnutrition étant susceptibles de mourir s’ils ne reçoivent pas suffisamment de nourriture. 
+                    Les enfants qui vivent dans des zones de conflit éloignées et les enfants déplacés sont 
+                    également susceptibles de se passer de nourriture car il est difficile pour les travailleurs 
+                    humanitaires de les rejoindre.<br><br>
+
+                    La malnutrition est un problème persistant pour les enfants congolais, avec 46% des enfants souffrant 
+                    d’un retard de croissance, affectant leur essor et leur développement. La malnutrition peut être 
+                    attribuée à une mauvaise nutrition, à des épisodes d’infection, et à une interaction psychosociale 
+                    insuffisante (c’est-à-dire un manque d’accès à l’éducation). La RDC souffre grandement de 
+                    malnutrition aiguë en nombre alarmant, ce qui a été défini comme une «crise silencieuse».
+               </p>
+            
+
+        </div>
+        
+        <!-- Video Column -->
+
+    </div>
+    <div class="row">
+        <!-- Title Column -->
+        <div class=" col-lg-6 col-md-12 col-sm-12" style="background-image:url({{url_for('static', filename='ucp/images/background/pattern-1.png')}})">
+            <br><br>
+            <div class="sec-title">
+                <h2>Logement.</h2>
+                <div class="separate"></div>
+            </div>
+                <!-- Sec Title -->
+                <p  style="color: black; font-size: 17px; position: relative;line-height: 1.7em;" class="text-o text-justify">
+                    Plusieurs facteurs clés contribuent au sans-abrisme: les conflits de guerre, 
+                    les déplacements internes, la maladie, et le chômage, qui font tous augmenter 
+                    le taux d’enfants sans-abri. L’instabilité politique et les conflits armés sont 
+                    les principales causes de la pauvreté en RDC depuis les années 1990. <br><br>
+
+                    La pauvreté et le sans-abrisme peuvent également être attribués à des familles 
+                    peu disposées à adopter les orphelins et les enfants non désirés, où les enfants 
+                    n’ont d’autre choix que de vivre dans la rue. Dans les conflits où le viol est 
+                    utilisé comme tactique de guerre, les femmes tombent enceintes et abandonnent 
+                    leur enfant en raison de l’humiliation et de l’embarras provenant de la société, 
+                    ainsi que des sentiments de honte. <br><br> 
+
+                    Les enfants qui sont nés à la suite d’un viol sont donc rejetés et abandonnés 
+                    par leur mère et parce qu’il n’y a aucune institution de protection de l’enfance
+                     dans le pays, les enfants souffrent beaucoup. Les enfants de viol sont également 
+                     exclus de leur communauté, ce qui leur cause de graves traumatismes et une grave
+                      détresse. Ces circonstances obligent les enfants à vivre dans la rue, un phénomène 
+                      également connu sous le nom d ‘«enfants des rues», où les enfants sont exposés à la
+                       violence et à des épreuves quotidiennement. La pauvreté et l’incapacité des familles à 
+                       subvenir aux besoins des enfants se traduisent également par des enfants abandonnés et 
+                       finalement sans abri.
+                </p>
+        </div>
+<div class="col-lg-6 col-md-12 col-sm-12" >
+    <div class="inner-column">
+        <div class="inner-box wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms" >
+            <img style="margin-top: 55px;" class="img-fluid box-shadow--4dp" src="{{url_for('static', filename='ucp/log.jpg')}}" alt="" />
+        </div>							
+    </div>
+</div>
+
+</div>
+    </div>
+
+
+<!-- /SERVICES -->
+
+	<!-- Call To Action Three Section -->
+	<section class="call-to-action-section-three" style="background-image: url({{url_for('static', filename='ucp/images/main-slider/bg-footer.jpg')}})">
+		<div class="auto-container">
+			<div class="row clearfix">
+				
+				<!-- Title Column -->
+				<div class="title-column col-lg-8 col-md-12 col-sm-12">
+					<div class="inner-column">
+						<h2>Les conflits armés sont un problème persistant dans des régions spécifiques de la RDC, et les enfants sont très vulnérables dans ces situations car ils sont impuissants face à la brutalité des groupes militants.</h2>
+					</div>
+				</div>
+				
+				<!-- Button Column -->
+				<div class="btn-column col-lg-4 col-md-12 col-sm-12">
+					<div class="inner-column">
+						<div class="number">+243 976 359 001</div>
+						<a href="contact.html" class="theme-btn btn-style-three"><span class="txt">Contactes-nous</span></a>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</section>
+	<!-- End Call To Action Three Section -->
+
+
+{% include 'element/upc/footer.html' %}
+
+
+
+
+
+
+
+
+{% endblock body %}
+
+{%block js%}
+<script>
+    
+</script>
+{%endblock%}

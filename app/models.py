@@ -159,6 +159,25 @@ class Comment(db.Model):
     commentaire_id = db.Column(db.Integer, db.ForeignKey('commentaire.id'), nullable=False) 
     def __repr__(self):
         return ' {} '.format(self.commentaire)
+    
+
+class Album(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    noms = db.Column(db.String(128), nullable=False)
+    nbr_picture=db.Column(db.Integer, default=0)
+    photos = db.relationship('Photo', backref='photos_album', lazy='dynamic')
+    statut= db.Column(db.Integer, default=0)
+
+    def __repr__(self):
+        return f"Album('{self.noms}')"
+
+class Photo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    album_id = db.Column(db.Integer, db.ForeignKey('album.id'), nullable=False)
+    photo = db.Column(db.String(128))
+    
+    def __repr__(self):
+        return f"Photo('{self.album_id}')"
 
 
 

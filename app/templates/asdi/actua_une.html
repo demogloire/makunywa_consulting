@@ -1,0 +1,125 @@
+{% extends "layout/ucp.html" %}
+
+{% block meta %}
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<link rel="shortcut icon" type="image/x-icon" href="{{url_for('static',filename='logo_t.png')}}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta property="og:title" content="{{une_pub.titre}}">
+<meta property="og:image" content="{{url_for('static', filename='publication/{}'.format(une_pub.url_img), _external=True)}}">
+<meta property="og:url" content="{{url_for('asdi.article', slug=une_pub.slug , _external=True)}}">
+
+<meta name="twitter:title" content="{{une_pub.titre}}">
+<meta name="twitter:image" content="{{url_for('static', filename='publication/{}'.format(une_pub.url_img), _external=True)}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="{{url_for('asdi.article', slug=une_pub.slug , _external=True)}}">
+<meta charset="utf-8">
+
+{% endblock meta %}
+
+{%block css%}
+
+</style>
+{%endblock%}
+
+
+{% block body %}
+{% include 'element/upc/header_two.html' %}
+{% include 'element/upc/brac.html' %}
+<div class="sidebar-page-container">
+    <div class="auto-container">
+        <div class="row clearfix">
+            
+            <div class="content-side col-lg-8 col-md-12 col-sm-12">
+                <div class="news-detail">
+                    <div class="inner-box">
+                        <div class="image">
+                            <img class="img-fluid" src="{{url_for('static', filename='publication/{}'.format(une_pub.url_img))}}" alt="">
+                        </div>
+                        <div class="lower-content">
+                            <ul class="post-meta">
+                                <li> <i class="fa fa-user"></i> {{une_pub.user_pub.prenom}}</li>
+                                <li>{%if une_pub.date_pub==une_pub.date_mod%}
+                                    <i class="fa fa-clock-o"></i> {{timeagos(une_pub.date_pub)}} 
+                                    {%else%}
+                                    <i class="fa fa-clock-o"></i> {{timeagos(une_pub.date_mod)}} 
+                                    {%endif%}</li>
+                                <li><i class="fa fa-eye"></i> {{une_pub.nbr_lu}}</li>
+                            </ul>
+                            <h3>{{une_pub.titre}}</h3>
+                            <div class="text">
+                                <p> {{une_pub.resume|safe}}</p>
+                            </div>
+                        </div>
+
+                        <!--post-share-options-->
+
+                        {%if fichier_docu != None%}
+                        <div class="post-share-options clearfix">
+                            <div class="pull-right">
+                                <ul class="social-icon-three">
+                                    <li><a class="btn btn-danger btn-md text-dark" href="{{url_for('static', filename='publication/{}'.format(fichier_docu.url_pdf))}}"><span class="fa fa-download"></span> Télécharger le fichier</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        {%endif%}
+
+                    </div>
+                </div>
+ 
+            </div>
+               <!-- Sidebar Side -->
+            <div class="sidebar-side col-lg-4 col-md-12 col-sm-12">
+                <aside class="sidebar sticky-top">
+                    <div class="sidebar-inner">
+                        
+                       <!-- Categories Widget -->
+                        {%if pub_meilleur!=[]%}
+                        <div class="sidebar-widget popular-posts">
+                            <div class="sidebar-title">
+                                <h2>Les plus lus</h2>
+                            </div>
+                            {%for publication in pub_meilleur%}
+                            <div class="widget-content">
+                                <article class="post">
+                                    <figure class="post-thumb"><img src="{{url_for('static', filename='publication/{}'.format(publication.url_img))}}" alt=""><a href="{{url_for('asdi.article', slug=publication.slug)}} " class="overlay-box"><span class="icon fa fa-link"></span></a></figure>
+                                    <div class="text"><a href="{{url_for('asdi.article', slug=publication.slug)}} ">{{publication.titre}}</a></div>
+                                    <div class="post-info">{{timeagos(publication.date_pub)}}</div>
+                                </article>
+                            </div>
+                            {%endfor%}
+                        </div>
+                        {%endif%}   
+                        <!-- Instagram Widget -->
+                        {%if photos !=[]%}
+                        <div class="sidebar-widget instagram-widget">
+                            <div class="sidebar-title">
+                                <h2>Evenements</h2>
+                            </div>
+                            {%for photo in photos%}
+                            <div class="widget-content">
+                                <div class="clearfix">
+                                    <figure class="post-thumb"><img src="{{url_for('static', filename='publication/{}'.format(photo.photo))}}" alt=""><a href="{{url_for('asdi.galerie_trie', id=photo.photos_album.id)}}" class="overlay-box"><span class="icon fa fa-link"></span></a></figure>
+                                </div>
+                            </div>
+                            {%endfor%}
+                        </div>
+                        {%endif%}                        
+                    </div>
+                </aside>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% include 'element/upc/footer.html' %}
+
+{% endblock body %}
+
+{% block js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+<script>
+    baguetteBox.run('.tz-gallery');
+</script>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "layout/ucp.html" %}
+
+{% block meta %}
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<link rel="shortcut icon" type="image/x-icon" href="{{url_for('static',filename='logo.jpg')}}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock meta %}
+
+
+
+
+{% block body %}
+
+<section class="error-section" style="background-image:url(images/background/2.jpg)">
+    <div class="auto-container">
+        <div class="content">
+            <h1>500</h1>
+            <h2>Oops! Erreur serveur </h2>
+            <div class="text">Le serveur a rencontré une erreur interne. C'est tout ce que nous savons.</div>
+            <a href="{{url_for('asdi.accueil')}}" class="theme-btn btn-style-one"><span class="txt">Page d'accueil</span></a>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+{% endblock body %}

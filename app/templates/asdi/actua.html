@@ -1,0 +1,139 @@
+{% extends "layout/ucp.html" %}
+
+{% block meta %}
+<meta name="robots" content="index">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<link rel="shortcut icon" type="image/x-icon" href="{{url_for('static',filename='logo_t.png')}}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:site_name" content="UCP">
+<meta property="og:title" content="Actualité">
+
+{% endblock meta %}
+
+{%block css%}
+
+</style>
+{%endblock%}
+
+
+{% block body %}
+{% include 'element/upc/header_two.html' %}
+{% include 'element/upc/brac.html' %}
+<div class="sidebar-page-container">
+    <div class="auto-container">
+        <div class="row clearfix">
+            
+            <!-- Content Side -->
+            <div class="content-side col-lg-8 col-md-12 col-sm-12">
+                <div class="blog-classic">
+                    {%if pub.items|length > 0%}
+                    {%for publication in pub.items%}
+                    <!-- News Block -->
+                    <div class="news-block-three">
+                        <div class="inner-box">
+                            <div class="image">
+                                <a href="{{url_for('asdi.article', slug=publication.slug)}}"><img src="{{url_for('static', filename='publication/{}'.format(publication.url_img))}}" alt=""></a>
+                            </div>
+                            <div class="lower-content">
+                                <ul class="post-meta">
+                                    <li> <i class="fa fa-user"></i> {{publication.user_pub.prenom}}</li>
+                                    <li>{%if publication.date_pub==publication.date_mod%}
+                                        <i class="fa fa-clock-o"></i> {{timeagos(publication.date_pub)}} 
+                                        {%else%}
+                                        <i class="fa fa-clock-o"></i> {{timeagos(publication.date_mod)}} 
+                                        {%endif%}</li>
+                                    <li><i class="fa fa-eye"></i> {{publication.nbr_lu}}</li>
+                                </ul>
+                                <h3><a href="{{url_for('asdi.article', slug=publication.slug)}}">{{publication.titre}}</a></h3>
+                               <a href="{{url_for('asdi.article', slug=publication.slug)}}" class="btn btn-info btn-md">Lire</a>
+                            </div>
+                        </div>
+                    </div>
+                    {%endfor%}
+                    
+
+                    <!--Post Share Options-->
+                    <div class="styled-pagination text-center">
+                        <ul class="clearfix">
+                            {%if pub.items|length>3%}
+                            {% for page_num in pub.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                            {% if page_num %}
+                                {% if pub.page==page_num %}
+                            <li class="prev"><a href="{{ url_for('asdi.actualite', page=page_num) }}"><span class="fa fa-angle-left"></span> </a></li>
+                            {% else %}
+                            <li class="next"><a href="{{ url_for('asdi.actualite', page=page_num) }}"><span class="fa fa-angle-right"></span> </a></li>
+                            {% endif %}
+                            {% else %}
+                            ...
+                            {% endif %}
+                            {% endfor %}
+                            {%endif%}
+                        </ul>
+                    </div>
+
+                    {%else%}
+                    <div class="row justify-content-center">
+                        <div class="col-md-12" style="margin-top: 50px;margin-bottom: 50px;">
+                            <h1 class="text-center" style="font-weight: 900 bold;font-size:70px; text-shadow: -1px -1px white, 1px 1px #333; color:#AC9757; font-family: Trattatello, fantasy;">Aucun article publié.</h1>
+                        </div>
+                    </div>
+                    {%endif%}
+                    
+                </div>
+            </div>
+            
+               <!-- Sidebar Side -->
+            <div class="sidebar-side col-lg-4 col-md-12 col-sm-12">
+                <aside class="sidebar sticky-top">
+                    <div class="sidebar-inner">
+                        
+                       <!-- Categories Widget -->
+                        {%if pub_meilleur!=[]%}
+                        <div class="sidebar-widget popular-posts">
+                            <div class="sidebar-title">
+                                <h2>Les plus lus</h2>
+                            </div>
+                            {%for publication in pub_meilleur%}
+                            <div class="widget-content">
+                                <article class="post">
+                                    <figure class="post-thumb"><img src="{{url_for('static', filename='publication/{}'.format(publication.url_img))}}" alt=""><a href="{{url_for('asdi.article', slug=publication.slug)}} " class="overlay-box"><span class="icon fa fa-link"></span></a></figure>
+                                    <div class="text"><a href="{{url_for('asdi.article', slug=publication.slug)}} ">{{publication.titre}}</a></div>
+                                    <div class="post-info">{{timeagos(publication.date_pub)}}</div>
+                                </article>
+                            </div>
+                            {%endfor%}
+                        </div>
+                        {%endif%}   
+                        <!-- Instagram Widget -->
+                        {%if photos !=[]%}
+                        <div class="sidebar-widget instagram-widget">
+                            <div class="sidebar-title">
+                                <h2>Evenements</h2>
+                            </div>
+                            {%for photo in photos%}
+                            <div class="widget-content">
+                                <div class="clearfix">
+                                    <figure class="post-thumb"><img src="{{url_for('static', filename='publication/{}'.format(photo.photo))}}" alt=""><a href="{{url_for('asdi.galerie_trie', id=photo.photos_album.id)}}" class="overlay-box"><span class="icon fa fa-link"></span></a></figure>
+                                </div>
+                            </div>
+                            {%endfor%}
+                        </div>
+                        {%endif%}                        
+                    </div>
+                </aside>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% include 'element/upc/footer.html' %}
+
+{% endblock body %}
+
+{% block js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+<script>
+    baguetteBox.run('.tz-gallery');
+</script>
+
+{% endblock %}

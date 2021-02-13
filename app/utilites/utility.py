@@ -12,7 +12,7 @@ from flask import session
 
 #Titre
 def title_page(nom="Dashbord"):
-    title=f'{nom} | ASDI'
+    title=f'{nom} | UCP'
     return title
 
 #Historique

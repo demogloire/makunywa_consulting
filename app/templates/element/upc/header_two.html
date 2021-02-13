@@ -1,0 +1,110 @@
+<header class="main-header header-style-one">
+    	
+    <div class="header-top-one">
+        <div class="auto-container">
+            <div class="text">Ensemble réalisons leurs rêves...</div>
+        </div>
+    </div>
+    
+    <!--Header-Upper-->
+    <div class="header-upper">
+        <div class="auto-container">
+            <div class="clearfix">
+                
+                <div class="pull-left logo-box">
+                    <div class="logo"><a href="{{url_for('asdi.accueil')}}"><img src="{{ url_for('static', filename='ucp/images/logo-2.png')}}" alt="" title=""></a></div>
+                </div>
+                
+                <div class="pull-right upper-right">
+                    <div class="info-outer clearfix">
+                        <!--Info Box-->
+                        <div class="upper-column info-box">
+                            <div class="icon-box"><span class="flaticon-24-hours-2"></span></div>
+                            <ul>
+                                <li><span>Heure de travail</span> <br> Lun - Sam: 08h à 17h00</li>
+                            </ul>
+                        </div>
+                        
+                        <!--Info Box-->
+                        <div class="upper-column info-box">
+                            <div class="icon-box info"><span class="flaticon-24-hours-2"></span></div>
+                            <ul>
+                                <li><span>Uvira.</span> <br> En face de mosque, Mulongwe</li>
+                            </ul>
+                        </div>
+                        
+                        <!--Info Box-->
+                        <div class="upper-column info-box">
+                            <div class="icon-box"><span class="flaticon-call"></span></div>
+                            <ul>
+                                <li><span>+243 976 359 001 </span> <br> info@uvirachildrensproject.org</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!--Header Lower-->
+                    <div class="header-lower clearfix">
+                        
+                        <div class="nav-outer clearfix">
+                            <!--Mobile Navigation Toggler-->
+                            <div class="mobile-nav-toggler"><span class="icon flaticon-menu"></span></div>
+                            <!-- Main Menu -->
+                            <nav class="main-menu navbar-expand-md">
+                                <div class="navbar-header">
+                                    <!-- Toggle Button -->    	
+                                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                </div>
+                                
+                                <div class="navbar-collapse collapse clearfix" id="navbarSupportedContent">
+                                    <ul class="navigation clearfix">
+                                        <li><a class="current" href="{{url_for('asdi.accueil')}}">Acceuil</a></li>
+                                        <li class="dropdown"><a href="#">Qui sommes-nous?</a>
+                                            <ul>
+                                                <li><a href="{{url_for('asdi.apropos')}}#vision">Vision</a></li>
+                                                <li><a href="{{url_for('asdi.apropos')}}#mission">Mission </a></li>
+                                                
+                                            </ul>
+                                        </li>
+                                        <li><a class="current" href="{{url_for('asdi.galerie')}}">Galerie</a></li>
+                                        <li><a class="current" href="{{url_for('asdi.actualite')}}">Actus</a></li>
+                                        <li><a class="current" href="contact.html">Contact</a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                            
+                            <!-- Main Menu End-->
+                            <div class="outer-box clearfix">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-warning"><a  href="#googtrans(en|fr)" class="lang-en lang-select" data-lang="fr" class="dropdown-item"  >Français</a></button>
+                                    <button type="button" class="btn btn-danger"><a href="#googtrans(fr|en)" class="lang-en lang-select" data-lang="en"  >  Anglais</a></button>
+                                  </div>     
+                            </div>
+                            <div class="side-curve"></div>
+                        </div>
+                        
+                    </div>
+                    <!--End Header Lower-->
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+    <!--End Header Upper-->
+    
+   
+    <div class="mobile-menu">
+        <div class="menu-backdrop"></div>
+        <div class="close-btn"><span class="icon flaticon-multiply"></span></div>
+        
+        <nav class="menu-box">
+            <div class="nav-logo"><a href="{{url_for('asdi.accueil')}}"><img src="{{ url_for('static', filename='ucp/images/logo-2.png')}}" alt="" title=""></a></div>
+            <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
+        </nav>
+    </div><!-- End Mobile Menu -->
+</header>

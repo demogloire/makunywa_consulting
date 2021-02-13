@@ -8,5 +8,5 @@ from . import main
 @main.route("/")
 @login_required
 def dashboard():
-    return 'login'
+    return render_template('main/index.html',title="Dashboard")
 
