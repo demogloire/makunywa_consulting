@@ -18,7 +18,6 @@ Mako==1.1.1
 Markdown==3.2.1
 MarkupSafe==1.1.1
 Pillow==7.0.0
-protobuf==3.11.3
 pycparser==2.19
 PyMySQL==0.9.3
 python-dateutil==2.8.1
